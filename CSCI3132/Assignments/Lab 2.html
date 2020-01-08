@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lab2</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="csci-3132-object-oriented-and-generic-programming">CSCI 3132 Object-Oriented and Generic Programming</h1>
+<hr />
+<p>CSCI 3132<br />Summer 2019<br />Reza Rahimi<br /><a href="mailto:Reza.Rahimi@Dal.Ca">Reza.Rahimi@Dal.Ca</a></p>
+<h2 id="lab-2">Lab 2</h2>
+<hr />
+<h3 id="1-class-and-object">1. Class and Object</h3>
+<p><a href="https://www.geeksforgeeks.org/c-classes-and-objects/">Classes and Object</a></p>
+<h3 id="3-inheritance-and-composition">2. Inheritance and Composition</h3>
+<p><a href="https://www.geeksforgeeks.org/inheritance-in-c/">Inheritance and Composition</a></p>
+<h3 id="3-lab-exercise">3. Lab exercise</h3>
+<ul>
+<li>
+<p>How to write classes in heather files (.h) and source files (.cpp).</p>
+</li>
+<li>
+<p><a href="https://www.lucidchart.com">Draw class diagrams with UML tools</a></p>
+</li>
+<li>
+<p>How does composition work in C++?</p>
+</li>
+</ul>
+<h3 id="4-assignment">4. Assignment</h3>
+<p>1- Complete the implementation of the class date that represents dates written in the form day/month/year. Do not modify the main program. You must write the prototypes and the definitions of the methods of the class.<br /><strong>Declaration of Class Date</strong></p>
+<div class="sourceCode" id="cb1">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="co">/* File: date.h</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">A class representing dates in the form: day , month and year</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">dat e s are written to a stream in the form day/month/ year</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">day_number( ) returns the number of days since 1/1 of the current</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co"> year including the current day</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">days_between( ) returns the number of days between two dates not </span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">including the first day but including the last day. */</span></a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="pp">#ifndef DATE_H</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="pp">#define D</span>ATE_H</a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="kw">using</span> <span class="kw">namespace</span> std ;</a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="kw">class</span> date {</a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="kw">private</span> :</a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="dt">int</span> day ;</a>
+<a class="sourceLine" id="cb1-20" title="20">    <span class="dt">int</span> month ;</a>
+<a class="sourceLine" id="cb1-21" title="21">    <span class="dt">int</span> year ;</a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="kw">public</span> :</a>
+<a class="sourceLine" id="cb1-23" title="23">    <span class="co">// you fill in the method prototypes</span></a>
+<a class="sourceLine" id="cb1-24" title="24">};</a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="pp">#endif </span><span class="co">/* DATE_H */</span></a></code></pre>
+</div>
+<p><strong>Implementation of Class Date</strong></p>
+<div class="sourceCode" id="cb2">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="co">/* File : date.cpp</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">Implementation of class date */</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="pp">#include </span><span class="im">"date.h"</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">// number of days in each month</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="at">const</span> <span class="dt">int</span> DAYS[ <span class="dv">12</span> ] = {<span class="dv">31</span> , <span class="dv">28</span> , <span class="dv">31</span> , <span class="dv">30</span> , <span class="dv">31</span> , <span class="dv">30</span> , <span class="dv">31</span> , <span class="dv">31</span> , <span class="dv">30</span> , <span class="dv">31</span> , <span class="dv">30</span> , <span class="dv">31</span> };</a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">///////////////////////// Methods of date ////////////////////////////</span></a></code></pre>
+</div>
+<p><strong>Main Program Using Class Date</strong></p>
+<div class="sourceCode" id="cb3">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="co">/* File : testdate.cpp</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co">Application program using class time</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">Programmer : your name Date : */</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="pp">#include </span><span class="im">"date.h"</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="dt">int</span> main (<span class="dt">void</span>)</a>
+<a class="sourceLine" id="cb3-6" title="6">{</a>
+<a class="sourceLine" id="cb3-7" title="7">    ofstream fout(<span class="st">"date.txt"</span>);</a>
+<a class="sourceLine" id="cb3-8" title="8">    date d(<span class="dv">12</span> , <span class="dv">6</span> , <span class="dv">2016</span>);</a>
+<a class="sourceLine" id="cb3-9" title="9">    date e(<span class="dv">14</span> , <span class="dv">9</span> , <span class="dv">2018</span>);</a>
+<a class="sourceLine" id="cb3-10" title="10">    fout &lt;&lt; <span class="st">"For the date "</span> ;</a>
+<a class="sourceLine" id="cb3-11" title="11">    d.write( fout ) ;</a>
+<a class="sourceLine" id="cb3-12" title="12">    fout &lt;&lt; endl ;</a>
+<a class="sourceLine" id="cb3-13" title="13">    fout &lt;&lt; <span class="st">"Day number is "</span> &lt;&lt; d.day_number() &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb3-14" title="14">    fout &lt;&lt; <span class="st">"</span><span class="sc">\n</span><span class="st">For the date "</span> ;</a>
+<a class="sourceLine" id="cb3-15" title="15">    e.write(fout);</a>
+<a class="sourceLine" id="cb3-16" title="16">    fout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb3-17" title="17">    fout &lt;&lt; <span class="st">"Day number is "</span>&lt;&lt; e.day_number() &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb3-18" title="18">    fout &lt;&lt; <span class="st">"</span><span class="sc">\n</span><span class="st">Days between "</span> ;</a>
+<a class="sourceLine" id="cb3-19" title="19">    d.write(fout) ;</a>
+<a class="sourceLine" id="cb3-20" title="20">    fout &lt;&lt; <span class="st">" and "</span>;</a>
+<a class="sourceLine" id="cb3-21" title="21">    e.write(fout);</a>
+<a class="sourceLine" id="cb3-22" title="22">    fout &lt;&lt; <span class="st">" = "</span> &lt;&lt; d.days_between(e) &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb3-23" title="23">    fout.close();</a>
+<a class="sourceLine" id="cb3-24" title="24">    <span class="cf">return</span> <span class="dv">0</span> ;</a>
+<a class="sourceLine" id="cb3-25" title="25">}</a></code></pre>
+</div>
+<p><strong>Your program output should be:</strong></p>
+<div class="sourceCode" id="cb4">
+<pre class="sourceCode txt"><code class="sourceCode default"><a class="sourceLine" id="cb4-1" title="1">For the date 12/6/2016</a>
+<a class="sourceLine" id="cb4-2" title="2">Day number is 163</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4">For the date 14/9/2018</a>
+<a class="sourceLine" id="cb4-5" title="5">Day number is 257</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">Days between 12/6/2016 and 14/9/2018 = 824</a></code></pre>
+</div>
+<p>compile code is</p>
+<div class="sourceCode" id="cb5">
+<pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">g++</span> date.cpp testDate.cpp -o testDate</a></code></pre>
+</div>
+<p>2- In this question, we model a database of employees of a company. Assume that there are only three types of employees: managers, scientists and labourers. The database is to store a name, an employee number, and a salary for each employee. In addition, for managers a title is stored, for scientists the number of publications is stored, for labourers a department is stored. We will use a base class called employee and three derived classes: labourer, scientist and manager as shown below.</p>
+<ul>
+<li>Write the required member functions for implementing these classes in the program <strong>employeetypes</strong>.</li>
+<li>Draw the class diagram using the UML drawing tool (<a href="https://www.lucidchart.com/">https://www.lucidchart.com/</a>). For marking purpose just submit the screenshot of your class diagram.</li>
+</ul>
+<p><strong>For marking purposes run the program and use the following data.</strong></p>
+<div class="sourceCode" id="cb6">
+<pre class="sourceCode txt"><code class="sourceCode default"><a class="sourceLine" id="cb6-1" title="1">data to be entered</a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3">labourer</a>
+<a class="sourceLine" id="cb6-4" title="4">name : blue</a>
+<a class="sourceLine" id="cb6-5" title="5">id : 3434</a>
+<a class="sourceLine" id="cb6-6" title="6">salary : 41000</a>
+<a class="sourceLine" id="cb6-7" title="7">department : shipping</a>
+<a class="sourceLine" id="cb6-8" title="8"></a>
+<a class="sourceLine" id="cb6-9" title="9">manager</a>
+<a class="sourceLine" id="cb6-10" title="10">name : yellow</a>
+<a class="sourceLine" id="cb6-11" title="11">id : 565</a>
+<a class="sourceLine" id="cb6-12" title="12">salary : 54000</a>
+<a class="sourceLine" id="cb6-13" title="13">title : accountsmanager</a>
+<a class="sourceLine" id="cb6-14" title="14"></a>
+<a class="sourceLine" id="cb6-15" title="15">scientist</a>
+<a class="sourceLine" id="cb6-16" title="16">name : green</a>
+<a class="sourceLine" id="cb6-17" title="17">id : 234</a>
+<a class="sourceLine" id="cb6-18" title="18">salary : 79000</a>
+<a class="sourceLine" id="cb6-19" title="19">number of publications : 23</a></code></pre>
+</div>
+<div class="sourceCode" id="cb7">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb7-1" title="1"><span class="co">/* File: employeetypes.h</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">Program to illustrate derived classes */</span></a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="pp">#pragma once </span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="pp">#include </span><span class="im">&lt;fstream&gt;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="kw">using</span> <span class="kw">namespace</span> std;</a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="kw">class</span> employee {</a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="kw">private</span>:</a>
+<a class="sourceLine" id="cb7-11" title="11">    string name; <span class="co">// last name</span></a>
+<a class="sourceLine" id="cb7-12" title="12">    <span class="dt">int</span> id; <span class="co">// employee id number</span></a>
+<a class="sourceLine" id="cb7-13" title="13">    <span class="dt">float</span> salary; <span class="co">// employee salary</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb7-15" title="15">    employee(string n=<span class="st">"none"</span>, <span class="dt">int</span> i=<span class="dv">0</span>, <span class="dt">float</span> s=<span class="fl">0.0</span>);</a>
+<a class="sourceLine" id="cb7-16" title="16">    <span class="dt">void</span> write(ostream &amp; out) <span class="at">const</span>;</a>
+<a class="sourceLine" id="cb7-17" title="17">    <span class="dt">void</span> read(istream &amp; in);</a>
+<a class="sourceLine" id="cb7-18" title="18">};</a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="kw">class</span> manager : <span class="kw">public</span> employee {</a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="kw">private</span>:</a>
+<a class="sourceLine" id="cb7-21" title="21">    string title; <span class="co">// vice-president etc</span></a>
+<a class="sourceLine" id="cb7-22" title="22"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb7-23" title="23">    manager(string n=<span class="st">"none"</span>, <span class="dt">int</span> i=<span class="dv">0</span>, <span class="dt">float</span> s=<span class="fl">0.0</span>, string t=<span class="st">"none"</span>);</a>
+<a class="sourceLine" id="cb7-24" title="24">    <span class="dt">void</span> write(ostream &amp; out) <span class="at">const</span>;</a>
+<a class="sourceLine" id="cb7-25" title="25">    <span class="dt">void</span> read(istream &amp; in);</a>
+<a class="sourceLine" id="cb7-26" title="26">};</a>
+<a class="sourceLine" id="cb7-27" title="27"><span class="kw">class</span> scientist : <span class="kw">public</span> employee{</a>
+<a class="sourceLine" id="cb7-28" title="28"><span class="kw">private</span>:</a>
+<a class="sourceLine" id="cb7-29" title="29">    <span class="dt">int</span> pubs; <span class="co">// number of publications</span></a>
+<a class="sourceLine" id="cb7-30" title="30"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb7-31" title="31">    scientist(string n=<span class="st">"none"</span>, <span class="dt">int</span> i=<span class="dv">0</span>, <span class="dt">float</span> s=<span class="fl">0.0</span>, <span class="dt">int</span> p=<span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb7-32" title="32">    <span class="dt">void</span> write(ostream &amp; out) <span class="at">const</span>;</a>
+<a class="sourceLine" id="cb7-33" title="33">    <span class="dt">void</span> read(istream &amp; in);</a>
+<a class="sourceLine" id="cb7-34" title="34">};</a>
+<a class="sourceLine" id="cb7-35" title="35"><span class="kw">class</span> labourer : <span class="kw">public</span> employee {</a>
+<a class="sourceLine" id="cb7-36" title="36"><span class="kw">private</span>:</a>
+<a class="sourceLine" id="cb7-37" title="37">    string dept;</a>
+<a class="sourceLine" id="cb7-38" title="38"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb7-39" title="39">    labourer(string n=<span class="st">"none"</span>, <span class="dt">int</span> i=<span class="dv">0</span>, <span class="dt">float</span> s=<span class="fl">0.0</span>, string d=<span class="st">"none"</span>);</a>
+<a class="sourceLine" id="cb7-40" title="40">    <span class="dt">void</span> write(ostream &amp; out) <span class="at">const</span>;</a>
+<a class="sourceLine" id="cb7-41" title="41">    <span class="dt">void</span> read(istream &amp; in);</a>
+<a class="sourceLine" id="cb7-42" title="42">};</a></code></pre>
+</div>
+<div class="sourceCode" id="cb8">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb8-1" title="1"><span class="co">/* File: employeetypes.cpp</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">Implementation of classes employeetypes */</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="pp">#include </span><span class="im">"employeetypes.h"</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">///////////////// Member functions of employee /////////////////////////////</span></a>
+<a class="sourceLine" id="cb8-5" title="5">employee::employee(string n, <span class="dt">int</span> i, <span class="dt">float</span> s)</a>
+<a class="sourceLine" id="cb8-6" title="6">: name(n), id(i), salary(s)</a>
+<a class="sourceLine" id="cb8-7" title="7">{}</a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="dt">void</span> employee::write(ostream &amp; out) <span class="at">const</span></a>
+<a class="sourceLine" id="cb8-10" title="10">{</a>
+<a class="sourceLine" id="cb8-11" title="11">    out &lt;&lt; <span class="st">"name : "</span> &lt;&lt; name &lt;&lt; <span class="st">"</span><span class="sc">\n</span><span class="st">id : "</span> &lt;&lt; id &lt;&lt; <span class="st">"</span><span class="sc">\n</span><span class="st">salary: "</span> &lt;&lt; salary &lt;&lt; <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>;</a>
+<a class="sourceLine" id="cb8-12" title="12">}</a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="dt">void</span> employee::read(istream &amp; in)</a>
+<a class="sourceLine" id="cb8-14" title="14">{</a>
+<a class="sourceLine" id="cb8-15" title="15">    cout &lt;&lt; <span class="st">"name : "</span>;</a>
+<a class="sourceLine" id="cb8-16" title="16">    in &gt;&gt; name;</a>
+<a class="sourceLine" id="cb8-17" title="17">    cout &lt;&lt; <span class="st">"id : "</span>;</a>
+<a class="sourceLine" id="cb8-18" title="18">    in &gt;&gt; id;</a>
+<a class="sourceLine" id="cb8-19" title="19">    cout &lt;&lt; <span class="st">"salary: "</span>;</a>
+<a class="sourceLine" id="cb8-20" title="20">    in &gt;&gt; salary;</a>
+<a class="sourceLine" id="cb8-21" title="21">}</a>
+<a class="sourceLine" id="cb8-22" title="22"><span class="co">//////////////////// Member functions of labourer /////////////////////////</span></a>
+<a class="sourceLine" id="cb8-23" title="23"></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="co">//////////////////// Member functions of manager ///////////////////////////</span></a>
+<a class="sourceLine" id="cb8-25" title="25"></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="co">//////////////////// Member functions of scientist ////////////////////////</span></a></code></pre>
+</div>
+<div class="sourceCode" id="cb9">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb9-1" title="1"><span class="co">/* File: testemployeetypes.cpp</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co">Application program using classes employeetypes</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">Programmer: your name Date: */</span></a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="pp">#include </span><span class="im">"employeetypes.h"</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="dt">int</span> main(<span class="dt">void</span>)</a>
+<a class="sourceLine" id="cb9-7" title="7">{</a>
+<a class="sourceLine" id="cb9-8" title="8">    string type; <span class="co">// employee type</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    ofstream fout (<span class="st">"employeetypesout.txt"</span>);</a>
+<a class="sourceLine" id="cb9-10" title="10">    <span class="cf">while</span>(<span class="kw">true</span>) { <span class="co">// loop until break occurs</span></a>
+<a class="sourceLine" id="cb9-11" title="11">        cout &lt;&lt; endl &lt;&lt; <span class="st">"Type of employee: "</span>;</a>
+<a class="sourceLine" id="cb9-12" title="12">        cin &gt;&gt; type;</a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="cf">if</span> (type == <span class="st">"q"</span>) <span class="cf">break</span>;</a>
+<a class="sourceLine" id="cb9-14" title="14">        <span class="cf">if</span>(type == <span class="st">"labourer"</span>) {</a>
+<a class="sourceLine" id="cb9-15" title="15">            labourer lab; <span class="co">// think about why we are not instantiating the object outside the while loop scope </span></a>
+<a class="sourceLine" id="cb9-16" title="16">            lab.read(cin);</a>
+<a class="sourceLine" id="cb9-17" title="17">            cout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb9-18" title="18">            lab.write(cout);</a>
+<a class="sourceLine" id="cb9-19" title="19">            fout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb9-20" title="20">            lab.write(fout);</a>
+<a class="sourceLine" id="cb9-21" title="21">        } <span class="cf">else</span> <span class="cf">if</span> (type == <span class="st">"scientist"</span>) {</a>
+<a class="sourceLine" id="cb9-22" title="22">            scientist sci;</a>
+<a class="sourceLine" id="cb9-23" title="23">            sci.read(cin);</a>
+<a class="sourceLine" id="cb9-24" title="24">            cout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb9-25" title="25">            sci.write(cout);</a>
+<a class="sourceLine" id="cb9-26" title="26">            fout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb9-27" title="27">            sci.write(fout);</a>
+<a class="sourceLine" id="cb9-28" title="28">        } <span class="cf">else</span> <span class="cf">if</span> (type == <span class="st">"manager"</span>) {</a>
+<a class="sourceLine" id="cb9-29" title="29">            manager man;</a>
+<a class="sourceLine" id="cb9-30" title="30">            man.read(cin);</a>
+<a class="sourceLine" id="cb9-31" title="31">            cout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb9-32" title="32">            man.write(cout);</a>
+<a class="sourceLine" id="cb9-33" title="33">            fout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb9-34" title="34">            man.write(fout);</a>
+<a class="sourceLine" id="cb9-35" title="35">        }</a>
+<a class="sourceLine" id="cb9-36" title="36">        }</a>
+<a class="sourceLine" id="cb9-37" title="37">        fout.close();</a>
+<a class="sourceLine" id="cb9-38" title="38">        <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb9-39" title="39">}</a></code></pre>
+</div>
+<div class="sourceCode" id="cb10">
+<pre class="sourceCode txt"><code class="sourceCode default"><a class="sourceLine" id="cb10-1" title="1">name : blue</a>
+<a class="sourceLine" id="cb10-2" title="2">id : 3434</a>
+<a class="sourceLine" id="cb10-3" title="3">salary : 41000</a>
+<a class="sourceLine" id="cb10-4" title="4">department : shipping</a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6">name : yellow</a>
+<a class="sourceLine" id="cb10-7" title="7">id : 565</a>
+<a class="sourceLine" id="cb10-8" title="8">salary : 54000</a>
+<a class="sourceLine" id="cb10-9" title="9">title : accountsmanager</a>
+<a class="sourceLine" id="cb10-10" title="10"></a>
+<a class="sourceLine" id="cb10-11" title="11">name : green</a>
+<a class="sourceLine" id="cb10-12" title="12">id : 234</a>
+<a class="sourceLine" id="cb10-13" title="13">salary : 79000</a>
+<a class="sourceLine" id="cb10-14" title="14">number of publications : 23 </a></code></pre>
+</div>
+<p>compile code is</p>
+<div class="sourceCode" id="cb11">
+<pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="ex">g++</span> employeetypes.cpp testemployee.cpp -o testemployee</a></code></pre>
+</div>
+<p>3- In this question, we develop bank account classes so that the base class account has a method called write which sends the values of the members to a stream. This method is used in the derived classes to also send any new members to the stream. class savingsaccount has the data member interestrate and the method addinterest. class chequingaccount has the data member remainingfreewithdrawals and the withdraw method so that the withdrawal fee is not charged if remainingfreewithdrawls is positive.</p>
+<ul>
+<li>Complete the header file using the provided Class diagram.</li>
+<li>Complete the implementation of the derived classes. To achieve code reuse, methods of the derived classes must utilize methods of the base classes.</li>
+<li>For marking purposes, make sure your output matches the provided ones.</li>
+</ul>
+<p><img src="classDiagram.svg" alt="ClassDiagram" title="ClassDiagram" width="722" height="643" /></p>
+<p><strong>Declaration of Classes AccountTypes</strong></p>
+<div class="sourceCode" id="cb12">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb12-1" title="1"><span class="co">/*  File: accounttypes.h</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co">    Shows how to derive classes */</span></a>
+<a class="sourceLine" id="cb12-3" title="3"></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="pp">#ifndef ACCOUNTTYPES_H</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="pp">#define A</span>CCOUNTTYPES_H</a>
+<a class="sourceLine" id="cb12-6" title="6">    </a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="kw">using</span> <span class="kw">namespace</span> std;</a>
+<a class="sourceLine" id="cb12-10" title="10"></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="co">///////////////////// Declaration of class account ///////////////////////</span></a>
+<a class="sourceLine" id="cb12-12" title="12"></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="co">///////////////////// Declaration of class savingsaccount ///////////////////////</span></a>
+<a class="sourceLine" id="cb12-14" title="14"></a>
+<a class="sourceLine" id="cb12-15" title="15"><span class="co">///////////////////// Declaration of class chequingaccount ///////////////////////</span></a>
+<a class="sourceLine" id="cb12-16" title="16"></a>
+<a class="sourceLine" id="cb12-17" title="17"><span class="pp">#endif </span><span class="co">/* ACCOUNTTYPES_H */</span></a></code></pre>
+</div>
+<p><strong>Implementation of classes AccountTypes</strong></p>
+<div class="sourceCode" id="cb13">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb13-1" title="1"><span class="co">/*  File: accounttypes.cpp</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">    Implementation of classes accounttypes  */</span></a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="pp">#include </span><span class="im">"accounttypes.h"</span></a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co">///////////////////// implementation of account ///////////////////////</span></a>
+<a class="sourceLine" id="cb13-7" title="7">account::account(string name, <span class="dt">float</span> fee)</a>
+<a class="sourceLine" id="cb13-8" title="8">{</a>
+<a class="sourceLine" id="cb13-9" title="9">    owner = name;</a>
+<a class="sourceLine" id="cb13-10" title="10">    balance = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb13-11" title="11">    withdrawfee = fee;</a>
+<a class="sourceLine" id="cb13-12" title="12">}</a>
+<a class="sourceLine" id="cb13-13" title="13"></a>
+<a class="sourceLine" id="cb13-14" title="14"><span class="dt">void</span> account::write(ostream &amp; out) <span class="at">const</span></a>
+<a class="sourceLine" id="cb13-15" title="15">{</a>
+<a class="sourceLine" id="cb13-16" title="16">    out &lt;&lt; <span class="st">"owner: "</span> &lt;&lt; owner &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb13-17" title="17">    out &lt;&lt; <span class="st">"balance: "</span> &lt;&lt; balance &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb13-18" title="18">    out &lt;&lt; <span class="st">"withdrawfee "</span> &lt;&lt; withdrawfee &lt;&lt; endl; </a>
+<a class="sourceLine" id="cb13-19" title="19">}</a>
+<a class="sourceLine" id="cb13-20" title="20"></a>
+<a class="sourceLine" id="cb13-21" title="21"><span class="dt">void</span> account::deposit(<span class="dt">float</span> amount)</a>
+<a class="sourceLine" id="cb13-22" title="22">{</a>
+<a class="sourceLine" id="cb13-23" title="23">    balance = balance + amount;</a>
+<a class="sourceLine" id="cb13-24" title="24">}</a>
+<a class="sourceLine" id="cb13-25" title="25"></a>
+<a class="sourceLine" id="cb13-26" title="26"><span class="dt">bool</span> account::withdraw(<span class="dt">float</span> amount)</a>
+<a class="sourceLine" id="cb13-27" title="27">{</a>
+<a class="sourceLine" id="cb13-28" title="28">    <span class="dt">bool</span> result;</a>
+<a class="sourceLine" id="cb13-29" title="29">    <span class="cf">if</span> (amount &gt; balance-withdrawfee) { </a>
+<a class="sourceLine" id="cb13-30" title="30">        cout &lt;&lt; <span class="st">"Insufficient funds"</span>; </a>
+<a class="sourceLine" id="cb13-31" title="31">        result = <span class="kw">false</span>;</a>
+<a class="sourceLine" id="cb13-32" title="32">    } <span class="cf">else</span> { </a>
+<a class="sourceLine" id="cb13-33" title="33">        balance = balance - amount - withdrawfee;</a>
+<a class="sourceLine" id="cb13-34" title="34">        result = <span class="kw">true</span>;</a>
+<a class="sourceLine" id="cb13-35" title="35">    }</a>
+<a class="sourceLine" id="cb13-36" title="36"></a>
+<a class="sourceLine" id="cb13-37" title="37">    <span class="cf">return</span> result;</a>
+<a class="sourceLine" id="cb13-38" title="38">}</a>
+<a class="sourceLine" id="cb13-39" title="39"></a>
+<a class="sourceLine" id="cb13-40" title="40"><span class="dt">float</span> account::getbalance(<span class="dt">void</span>) <span class="at">const</span></a>
+<a class="sourceLine" id="cb13-41" title="41">{</a>
+<a class="sourceLine" id="cb13-42" title="42">    <span class="cf">return</span> balance;</a>
+<a class="sourceLine" id="cb13-43" title="43">}</a>
+<a class="sourceLine" id="cb13-44" title="44"></a>
+<a class="sourceLine" id="cb13-45" title="45"><span class="dt">float</span> account::getwithdrawfee(<span class="dt">void</span>) <span class="at">const</span></a>
+<a class="sourceLine" id="cb13-46" title="46">{</a>
+<a class="sourceLine" id="cb13-47" title="47">    <span class="cf">return</span> withdrawfee;</a>
+<a class="sourceLine" id="cb13-48" title="48">}</a>
+<a class="sourceLine" id="cb13-49" title="49"></a>
+<a class="sourceLine" id="cb13-50" title="50"><span class="co">///////////////////// implementation of savingsaccount ///////////////////////</span></a>
+<a class="sourceLine" id="cb13-51" title="51"></a>
+<a class="sourceLine" id="cb13-52" title="52"><span class="co">///////////////////// implementation of chequingaccount ///////////////////////</span></a></code></pre>
+</div>
+<p><strong>Main Program Using Classes AccountTypes</strong></p>
+<div class="sourceCode" id="cb14">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb14-1" title="1"><span class="co">/*  File: testaccounttypes.cpp</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co">    Application program using accounttypes classes </span></a>
+<a class="sourceLine" id="cb14-3" title="3"></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="co">    Programmer: your name             Date:                   */</span></a>
+<a class="sourceLine" id="cb14-5" title="5"></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="pp">#include </span><span class="im">"accounttypes.h"</span></a>
+<a class="sourceLine" id="cb14-7" title="7"></a>
+<a class="sourceLine" id="cb14-8" title="8"></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="dt">int</span> main(<span class="dt">void</span>)</a>
+<a class="sourceLine" id="cb14-10" title="10">{</a>
+<a class="sourceLine" id="cb14-11" title="11">    savingsaccount s(<span class="st">"joe"</span>, <span class="fl">0.50</span>, <span class="fl">0.02</span>);</a>
+<a class="sourceLine" id="cb14-12" title="12">    chequingaccount c(<span class="st">"bob"</span>, <span class="fl">0.50</span>, <span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb14-13" title="13"></a>
+<a class="sourceLine" id="cb14-14" title="14">    s.deposit(<span class="fl">100.</span>);</a>
+<a class="sourceLine" id="cb14-15" title="15">    c.deposit(<span class="fl">100.</span>);</a>
+<a class="sourceLine" id="cb14-16" title="16"></a>
+<a class="sourceLine" id="cb14-17" title="17">    cout &lt;&lt; <span class="st">"savings account: "</span> &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb14-18" title="18">    s.write(cout);</a>
+<a class="sourceLine" id="cb14-19" title="19">    cout &lt;&lt; endl &lt;&lt; <span class="st">"chequing account: "</span> &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb14-20" title="20">    c.write(cout);</a>
+<a class="sourceLine" id="cb14-21" title="21">   </a>
+<a class="sourceLine" id="cb14-22" title="22">    s.withdraw(<span class="fl">10.</span>);</a>
+<a class="sourceLine" id="cb14-23" title="23">    s.withdraw(<span class="fl">5.</span>);</a>
+<a class="sourceLine" id="cb14-24" title="24">    s.withdraw(<span class="fl">20.0</span>);</a>
+<a class="sourceLine" id="cb14-25" title="25">    s.addinterest();</a>
+<a class="sourceLine" id="cb14-26" title="26"></a>
+<a class="sourceLine" id="cb14-27" title="27">    cout &lt;&lt; endl &lt;&lt; <span class="st">"savings account: "</span> &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb14-28" title="28">    s.write(cout);</a>
+<a class="sourceLine" id="cb14-29" title="29"></a>
+<a class="sourceLine" id="cb14-30" title="30">    c.withdraw(<span class="fl">10.</span>);</a>
+<a class="sourceLine" id="cb14-31" title="31">    c.withdraw(<span class="fl">5.</span>);</a>
+<a class="sourceLine" id="cb14-32" title="32">    c.withdraw(<span class="fl">20.0</span>);</a>
+<a class="sourceLine" id="cb14-33" title="33"></a>
+<a class="sourceLine" id="cb14-34" title="34">    cout &lt;&lt; endl &lt;&lt; <span class="st">"chequing account: "</span> &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb14-35" title="35">    c.write(cout);</a>
+<a class="sourceLine" id="cb14-36" title="36"></a>
+<a class="sourceLine" id="cb14-37" title="37">   <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb14-38" title="38">}</a></code></pre>
+</div>
+<p><strong>Program output :</strong></p>
+<div class="sourceCode" id="cb15">
+<pre class="sourceCode txt"><code class="sourceCode default"><a class="sourceLine" id="cb15-1" title="1">savings account:</a>
+<a class="sourceLine" id="cb15-2" title="2">owner: joe</a>
+<a class="sourceLine" id="cb15-3" title="3">balance: 100</a>
+<a class="sourceLine" id="cb15-4" title="4">withdrawfee 0.5</a>
+<a class="sourceLine" id="cb15-5" title="5">interest rate: 0.02</a>
+<a class="sourceLine" id="cb15-6" title="6"></a>
+<a class="sourceLine" id="cb15-7" title="7">chequing account:</a>
+<a class="sourceLine" id="cb15-8" title="8">owner: bob</a>
+<a class="sourceLine" id="cb15-9" title="9">balance: 100</a>
+<a class="sourceLine" id="cb15-10" title="10">withdrawfee 0.5</a>
+<a class="sourceLine" id="cb15-11" title="11">remaining free withdrawals: 2</a>
+<a class="sourceLine" id="cb15-12" title="12"></a>
+<a class="sourceLine" id="cb15-13" title="13">savings account:</a>
+<a class="sourceLine" id="cb15-14" title="14">owner: joe</a>
+<a class="sourceLine" id="cb15-15" title="15">balance: 64.77</a>
+<a class="sourceLine" id="cb15-16" title="16">withdrawfee 0.5</a>
+<a class="sourceLine" id="cb15-17" title="17">interest rate: 0.02</a>
+<a class="sourceLine" id="cb15-18" title="18"></a>
+<a class="sourceLine" id="cb15-19" title="19">chequing account:</a>
+<a class="sourceLine" id="cb15-20" title="20">owner: bob</a>
+<a class="sourceLine" id="cb15-21" title="21">balance: 64.5</a>
+<a class="sourceLine" id="cb15-22" title="22">withdrawfee 0.5</a>
+<a class="sourceLine" id="cb15-23" title="23">remaining free withdrawals: 0</a></code></pre>
+</div>
+<h3 id="5-assignment-submission-and-marking-scheme">5. Assignment submission and marking scheme</h3>
+<p>Please note the followings during assignment submission.</p>
+<ul>
+<li>Make sure to save the files with the correct name. The sample files are provided for download you just need to add your code to it.</li>
+<li>Assignments should be submitted in BrightSpace.</li>
+<li>You need to submit the completed .h file and .cpp files for each question.</li>
+<li>You do not need to upload either the executable or the testProgramName.cpp.</li>
+<li>Please compress the .cpp and .h files of all questions in a single zip file then upload the zipped file on BrightSpace.</li>
+<li>Upload the class diagram in PNG format</li>
+</ul>
+<p><img src="submission.svg" alt="Sub" title="Sub" width="602" height="359" /></p>
+<p><strong>Marking rules</strong></p>
+<ul>
+<li>No mark will be given to the program that cannot be compiled with g++ compiler at the bluenose server.</li>
+<li>The output should look like the provided output file.</li>
+<li>Incorrect indentation will have a penalty of 5% for each question.</li>
+<li>Make sure to comment your code otherwise you could lose 5% for each question.</li>
+</ul>
+<p><strong>Making Scheme</strong></p>
+<ul>
+<li>Q1 .............. 20%</li>
+<li>Q2 .............. 35%</li>
+<li>Q3 .............. 45%</li>
+<li>total ........... 100%</li>
+</ul>
+</body>
+</html>

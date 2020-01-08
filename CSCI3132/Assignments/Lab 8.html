@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lab8</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="csci-3132-object-oriented-and-generic-programming">CSCI 3132 Object-Oriented and Generic Programming</h1>
+<hr />
+<p>CSCI 3132<br />Summer 2019<br />Reza Rahimi<br /><a href="mailto:Reza.Rahimi@Dal.Ca">Reza.Rahimi@Dal.Ca</a></p>
+<h2 id="stl-concepts-generic-programing">STL, Concepts, Generic programming</h2>
+<hr />
+<h3 id="stl">STL</h3>
+<h4 id="stdvector">std::vector</h4>
+<p>A dynamic array. An array that can be resized.</p>
+<div class="sourceCode" id="cb1">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">struct</span> Vertex </a>
+<a class="sourceLine" id="cb1-6" title="6">{</a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">float</span> x, y, z;</a>
+<a class="sourceLine" id="cb1-8" title="8">};</a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="bu">std::</span>ostream&amp; <span class="kw">operator</span>&lt;&lt;(<span class="bu">std::</span>ostream&amp; stream, <span class="at">const</span> Vertex&amp; vertex)</a>
+<a class="sourceLine" id="cb1-11" title="11">{</a>
+<a class="sourceLine" id="cb1-12" title="12">    stream &lt;&lt; vertex.x &lt;&lt; <span class="st">", "</span> &lt;&lt; vertex.y &lt;&lt; <span class="st">", "</span> &lt;&lt; vertex.z;</a>
+<a class="sourceLine" id="cb1-13" title="13">    <span class="cf">return</span> stream;</a>
+<a class="sourceLine" id="cb1-14" title="14">};</a>
+<a class="sourceLine" id="cb1-15" title="15"></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb1-17" title="17">    <span class="co">// 1. Create 5 objects of Vertex on stack</span></a>
+<a class="sourceLine" id="cb1-18" title="18">    <span class="co">// 2. Create 5 objects of Vertex on heap</span></a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="co">// 3. Create 5 objects of Vertex using std vector</span></a>
+<a class="sourceLine" id="cb1-20" title="20">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb1-21" title="21">}</a></code></pre>
+</div>
+<h4 id="stddeque">std::deque</h4>
+<p>Deque in standard template library is a double-ended queue. <a href="https://en.cppreference.com/w/cpp/container/deque">"Deque is an indexed sequence container that allows fast insertion and deletion at both its beginning and its end".</a>.</p>
+<div class="sourceCode" id="cb2">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="pp">#include </span><span class="im">&lt;deque&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"> </a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb2-5" title="5">{</a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="co">// Create a deque containing integers</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="co">// Add an integer to the beginning and end of the deque</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="co">// Remove an integer from the beginning and end of the deque</span></a>
+<a class="sourceLine" id="cb2-9" title="9">}</a></code></pre>
+</div>
+<h4 id="stdmap">std::map</h4>
+<p>map in STL is similar to the dictionary in Python.</p>
+<div class="sourceCode" id="cb3">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="pp">#include </span><span class="im">&lt;iomanip&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="pp">#include </span><span class="im">&lt;map&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"> </a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">// (1.1) Write a template function that prints maps</span></a>
+<a class="sourceLine" id="cb3-7" title="7"></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="kw">struct</span> Point { <span class="dt">double</span> x, y; };</a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw">struct</span> PointCmp {</a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="co">// (6.1) develop a comparison funcion by overloading the () operator</span></a>
+<a class="sourceLine" id="cb3-11" title="11">};</a>
+<a class="sourceLine" id="cb3-12" title="12"> </a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb3-14" title="14">{</a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="co">// (1) Default constructor</span></a>
+<a class="sourceLine" id="cb3-16" title="16"></a>
+<a class="sourceLine" id="cb3-17" title="17">  <span class="co">// (2) Range constructor</span></a>
+<a class="sourceLine" id="cb3-18" title="18"></a>
+<a class="sourceLine" id="cb3-19" title="19">  <span class="co">// (3) Copy constructor</span></a>
+<a class="sourceLine" id="cb3-20" title="20"></a>
+<a class="sourceLine" id="cb3-21" title="21">  <span class="co">// (4) Move constructor</span></a>
+<a class="sourceLine" id="cb3-22" title="22"></a>
+<a class="sourceLine" id="cb3-23" title="23">  <span class="co">// (5) Initializer list constructor</span></a>
+<a class="sourceLine" id="cb3-24" title="24"></a>
+<a class="sourceLine" id="cb3-25" title="25">  <span class="co">// (6) Custom Key class option 1: Use a comparison struct</span></a>
+<a class="sourceLine" id="cb3-26" title="26"></a>
+<a class="sourceLine" id="cb3-27" title="27">  <span class="co">// (7) Various ways of inserting elements</span></a>
+<a class="sourceLine" id="cb3-28" title="28">}</a></code></pre>
+</div>
+<p>A commonly used member of the std::map class is <strong>found</strong>.</p>
+<div class="sourceCode" id="cb4">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="pp">#include </span><span class="im">&lt;map&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb4-5" title="5">{  </a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="bu">std::</span>map&lt;<span class="dt">int</span>,<span class="bu">std::</span>string&gt; example = {{<span class="dv">1</span>,<span class="st">"John"</span>},{<span class="dv">2</span>,<span class="st">"Sam"</span>},{<span class="dv">2</span>,<span class="st">"Mary"</span>}};</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="co">// (1) Find an element in the map </span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="co">// (2) check to see if we found it or not</span></a>
+<a class="sourceLine" id="cb4-10" title="10">}</a></code></pre>
+</div>
+<h3 id="concepts-generic-programing">Concepts, Generic programing</h3>
+<p>Traditional programming.</p>
+<div class="sourceCode" id="cb5">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb5-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb5-6" title="6">{  </a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="co">// Traditional code:</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="dt">double</span> sqrt(<span class="dt">double</span> d); <span class="co">// C++84: accept any d that is a double</span></a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="dt">double</span> d = <span class="dv">7</span>;</a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="dt">double</span> d2 = sqrt(d); <span class="co">// fine: d is a double</span></a>
+<a class="sourceLine" id="cb5-11" title="11">    <span class="bu">std::</span>vector&lt;<span class="bu">std::</span>string&gt; vs = { <span class="st">"Good"</span>, <span class="st">"old"</span>, <span class="st">"templates"</span> };</a>
+<a class="sourceLine" id="cb5-12" title="12">    <span class="dt">double</span> d3 = sqrt(vs); <span class="co">// error: vs is not a double</span></a>
+<a class="sourceLine" id="cb5-13" title="13">}</a></code></pre>
+</div>
+<p>Generic code was first used in 1990s.</p>
+<div class="sourceCode" id="cb6">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">template</span>&lt;<span class="kw">class</span> T&gt; <span class="dt">void</span> sort(T&amp; c) <span class="co">// C++98: accept a c of any type T</span></a>
+<a class="sourceLine" id="cb6-2" title="2">{</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">// code for sorting (depending on various properties of T,</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">// such as having [] and a value type with &lt;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">}</a></code></pre>
+</div>
+<div class="sourceCode" id="cb7">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb7-1" title="1">    vector&lt;string&gt; vs = { <span class="st">"Good"</span>, <span class="st">"old"</span>, <span class="st">"templates"</span> };</a>
+<a class="sourceLine" id="cb7-2" title="2">    sort(vs); <span class="co">// fine: vs happens to have all the syntactic properties required by sort  </span></a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="dt">double</span> d = <span class="dv">7</span>;</a>
+<a class="sourceLine" id="cb7-5" title="5">    sort(d); <span class="co">// error: d doesn&rsquo;t have a [] operator</span></a></code></pre>
+</div>
+<p>Problems:</p>
+<ul>
+<li>No precise error while handling doubles</li>
+<li>The <strong>template&lt; typename T&gt;</strong> is hard to work with.</li>
+<li>The requirement of <strong>sort</strong> is hidden in its function body.</li>
+</ul>
+<p>Concepts allow us to specify the requirements of a template.</p>
+<div class="sourceCode" id="cb8">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb8-1" title="1">    <span class="co">// Generic code using a concept (Sortable):</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="dt">void</span> sort(Sortable&amp; c); <span class="co">// Concepts: accept any c that is Sortable</span></a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4">    vector&lt;string&gt; vs = { <span class="st">"Hello"</span>, <span class="st">"new"</span>, <span class="st">"World"</span> };</a>
+<a class="sourceLine" id="cb8-5" title="5">    sort(vs); <span class="co">// fine: vs is a Sortable container</span></a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="dt">double</span> d = <span class="dv">7</span>;</a>
+<a class="sourceLine" id="cb8-8" title="8">    sort(d); <span class="co">// error: d is not Sortable (double does not provide [], etc.)</span></a></code></pre>
+</div>
+<p>What is Sortable:</p>
+<p>It basically is a random access sequence with elements that can be compared using the &lt; operator.</p>
+<p>Using concepts we can specify a template type requirement like:</p>
+<ul>
+<li>An iterator <strong>Iterator&lt; T&gt;</strong></li>
+<li>A number <strong>Number&lt; T&gt;</strong></li>
+</ul>
+<p>In concepts,&nbsp;<strong>C &lt; T&gt;</strong> means <strong>C</strong> is a concept and <strong>T</strong> is an expression where it is true if <strong>T</strong> meets all the requirements of <strong>C</strong> and false otherwise.</p>
+<p>we write concepts like:</p>
+<div class="sourceCode" id="cb9">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">template</span>&lt; Sequence Seq&gt;</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="dt">void</span> algo(Seq&amp; s);</a></code></pre>
+</div>
+<p>is the same as</p>
+<div class="sourceCode" id="cb10">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">template</span>&lt; <span class="kw">typename</span> Seq&gt;</a>
+<a class="sourceLine" id="cb10-2" title="2">    requries Sequence&lt;Seq&gt;</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="dt">void</span> algo(Seq&amp; s);</a></code></pre>
+</div>
+<p>Therefore, concepts are declared as follows:</p>
+<div class="sourceCode" id="cb11">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">template</span>&lt;C T&gt;</a></code></pre>
+</div>
+<p>or</p>
+<div class="sourceCode" id="cb12">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">template</span>&lt; <span class="kw">typename</span> T&gt;</a>
+<a class="sourceLine" id="cb12-2" title="2">    <span class="kw">requires</span> C&lt;T&gt;</a></code></pre>
+</div>
+<p>let us try a more complex example with concept.</p>
+<div class="sourceCode" id="cb13">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb13-1" title="1"></a></code></pre>
+</div>
+</body>
+</html>

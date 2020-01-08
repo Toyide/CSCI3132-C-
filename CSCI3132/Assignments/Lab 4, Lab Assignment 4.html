@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lab7</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style>
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="csci-3132-object-oriented-and-generic-programming">CSCI 3132 Object-Oriented and Generic Programming</h1>
+<hr />
+<p>CSCI 3132<br />Summer 2019<br />Reza Rahimi<br /><a href="mailto:Reza.Rahimi@Dal.Ca">Reza.Rahimi@Dal.Ca</a></p>
+<h1 id="templates-lab-assignment-4">Templates, Lab Assignment 4</h1>
+<hr />
+<h3 id="1-lab-exercise">1. Lab exercise</h3>
+<p>In Java or C# this is called generic. However, template in c++ is quite different than those, they are infinitely more powerfully.</p>
+<p>The compiler writes code for you. Let us see an example of writing three functions for printing an integer number, a float number, and a string into the console.</p>
+<div class="sourceCode" id="cb1">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="pp">#define LOG</span>(x)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">// 1. Declare and impelement a print function that prints an integer number.</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">// 2. Declare and impelement a print function that prints a string.</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">// 3. Declare and impelement a print function that prints a float number.</span></a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb1-11" title="11">{</a>
+<a class="sourceLine" id="cb1-12" title="12">    Print(<span class="dv">5</span>);</a>
+<a class="sourceLine" id="cb1-13" title="13">    Print(<span class="st">"Reza"</span>);</a>
+<a class="sourceLine" id="cb1-14" title="14">    Print(<span class="fl">5.5</span><span class="bu">f</span>);</a>
+<a class="sourceLine" id="cb1-15" title="15">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb1-16" title="16">}</a></code></pre>
+</div>
+<p>Let us use a template function to make it much easier.</p>
+<div class="sourceCode" id="cb2">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="pp">#define LOG</span>(x)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">// 1. Try to use templates to have only one function that prints all three</span></a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb2-9" title="9">{</a>
+<a class="sourceLine" id="cb2-10" title="10">    Print(<span class="dv">5</span>);</a>
+<a class="sourceLine" id="cb2-11" title="11">    Print(<span class="st">"Reza"</span>);</a>
+<a class="sourceLine" id="cb2-12" title="12">    Print(<span class="fl">5.5</span><span class="bu">f</span>);</a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb2-14" title="14">}</a></code></pre>
+</div>
+<p>Let us go back to our vector example.</p>
+<div class="sourceCode" id="cb3">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="pp">#define LOG</span>(x)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">// 1. define a template size </span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">// 2. define template class</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="kw">class</span> vector {</a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw">private</span>:</a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="dt">int</span> <span class="va">m_vector</span>[size];</a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14">    vector () </a>
+<a class="sourceLine" id="cb3-15" title="15">    {</a>
+<a class="sourceLine" id="cb3-16" title="16">    }</a>
+<a class="sourceLine" id="cb3-17" title="17"></a>
+<a class="sourceLine" id="cb3-18" title="18">    <span class="dt">int</span> GetSize() <span class="at">const</span> { <span class="cf">return</span> size; }</a>
+<a class="sourceLine" id="cb3-19" title="19">};</a>
+<a class="sourceLine" id="cb3-20" title="20"></a>
+<a class="sourceLine" id="cb3-21" title="21"></a>
+<a class="sourceLine" id="cb3-22" title="22"><span class="dt">int</span> main(<span class="dt">void</span>) {</a>
+<a class="sourceLine" id="cb3-23" title="23"></a>
+<a class="sourceLine" id="cb3-24" title="24">    vector obj;</a>
+<a class="sourceLine" id="cb3-25" title="25">    LOG(obj.GetSize());</a>
+<a class="sourceLine" id="cb3-26" title="26"></a>
+<a class="sourceLine" id="cb3-27" title="27">   <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb3-28" title="28">}</a></code></pre>
+</div>
+<h3 id="2-lab-assignment-4">2. Lab assignment 4</h3>
+<p>The aim is to develop a template vector class that can handle any data type. Create a template class vector using the header file, "vector.h" and submit the "vector.h" file. Please note that the main file is provided in the assignment folder. Also, note that both the declaration and the implementation needs to be done in the "vector.h" file. Please make sure you have completed the followings tasks:</p>
+<p>Marking Scheme:<br />1- Testing the Default constructor that creates a vector of size zero of the types either integer numbers, float numbers, strings and etc. (5%)<br />2- Testing the attribute data in the vector class (5%)<br />3- Testing the overloaded constructor which inputs the size (5%)<br />4- Testing the overloaded constructor which inputs an array (5%)<br />5- Testing the overloaded array operator "[]" (5%)<br />6- Testing the overloaded shift operator "&lt;&lt;" (5%)<br />7- Testing the assign function (5%)<br />8- Testing the add function (5%)<br />9- Testing the overloaded add operator "+" (5%)<br />10- Testing the resize function (5%)<br />--- Clean code and commenting (10%)<br />--- Declare and implement the following functions in your vector class:<br />11- BubbleSort: (10%)<br />This function sorts the data array using bubble sort algorithm.<br />12- Rotate: (30%)<br />This function should perform a left rotation on a range of elements in the data array. The function takes three pointers as input (first, n_first, last). and<br />-- first - pointer to the beginning of the original range.<br />-- n_first - pointer to the element that should appear at the beginning of the rotated range.<br />-- first - pointer to the end of the original range.<br />this function swaps the elements in the range [first, last) in such a way that the element n_first becomes the first element of the new range and n_first - 1 becomes the last element.<br />Hint 1: Use std::iter_swap to swap elements of the data array<br />Hint 2: Use recursion in your function implementations. Therefore, this function should return a pointer to the n_first++.</p>
+<h4 id="important-notes">important notes</h4>
+<ul>
+<li>Please do not change the main file</li>
+<li>Only submit the "vector.h" file. (for template functions you should both declare and implement your class in the header file)</li>
+<li>Do not include the main function in your "vector.h" file.</li>
+<li>If your code did not compile for any of the tasks you will get a zero for that task.</li>
+<li>If you had a memory leak in any task you will lose one point in that task</li>
+<li>Please note that the <strong>sort</strong> and the <strong>rotate</strong> algorithms available in the standard template library are not allowed in this assignment.</li>
+<li><strong>Rotate and Sort function should perform an in-place operation.</strong></li>
+</ul>
+<p>The provided main file:</p>
+<div class="sourceCode" id="cb4">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1"><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="pp">#include </span><span class="im">"vector.h"</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="dt">int</span> main( <span class="dt">int</span> argc, <span class="dt">char</span> **argv ) {</a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="bu">std::</span>string s = argv[<span class="dv">1</span>];</a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="cf">if</span> (s == <span class="st">"1"</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8">    {</a>
+<a class="sourceLine" id="cb4-9" title="9">        vector&lt;<span class="dt">float</span>&gt; v1;</a>
+<a class="sourceLine" id="cb4-10" title="10">        vector&lt;<span class="dt">int</span>&gt; v2;</a>
+<a class="sourceLine" id="cb4-11" title="11">        vector&lt;<span class="bu">std::</span>string&gt; v3;</a>
+<a class="sourceLine" id="cb4-12" title="12">    }</a>
+<a class="sourceLine" id="cb4-13" title="13">    <span class="cf">if</span> (s == <span class="st">"2"</span>)</a>
+<a class="sourceLine" id="cb4-14" title="14">    {</a>
+<a class="sourceLine" id="cb4-15" title="15">        vector&lt;<span class="dt">float</span>&gt; v1(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb4-16" title="16">        v1.data[<span class="dv">0</span>] = <span class="fl">10.0</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-17" title="17">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-18" title="18">    }</a>
+<a class="sourceLine" id="cb4-19" title="19">    <span class="cf">if</span> (s == <span class="st">"3"</span>)</a>
+<a class="sourceLine" id="cb4-20" title="20">    {</a>
+<a class="sourceLine" id="cb4-21" title="21">        vector&lt;<span class="dt">int</span>&gt; v1(<span class="dv">5</span>);</a>
+<a class="sourceLine" id="cb4-22" title="22">        <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; v1.getSize(); i++)</a>
+<a class="sourceLine" id="cb4-23" title="23">            v1.data[i] = i;</a>
+<a class="sourceLine" id="cb4-24" title="24">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-25" title="25">    }</a>
+<a class="sourceLine" id="cb4-26" title="26">    <span class="cf">if</span> (s == <span class="st">"4"</span>)</a>
+<a class="sourceLine" id="cb4-27" title="27">    {</a>
+<a class="sourceLine" id="cb4-28" title="28">        <span class="dt">float</span> a[] = {<span class="fl">1.0</span><span class="bu">f</span>,<span class="fl">2.0</span><span class="bu">f</span>,<span class="fl">3.0</span><span class="bu">f</span>,<span class="fl">4.0</span><span class="bu">f</span>,<span class="fl">5.0</span><span class="bu">f</span>,<span class="fl">6.0</span><span class="bu">f</span>,<span class="fl">7.0</span><span class="bu">f</span>,<span class="fl">8.0</span><span class="bu">f</span>};</a>
+<a class="sourceLine" id="cb4-29" title="29">        vector&lt;<span class="dt">float</span>&gt; v1(a, a+<span class="dv">8</span>); <span class="co">// Using an overloaded constructor</span></a>
+<a class="sourceLine" id="cb4-30" title="30">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-31" title="31">    }</a>
+<a class="sourceLine" id="cb4-32" title="32">    <span class="cf">if</span> (s == <span class="st">"5"</span>)</a>
+<a class="sourceLine" id="cb4-33" title="33">    {</a>
+<a class="sourceLine" id="cb4-34" title="34">        vector&lt;<span class="bu">std::</span>string&gt; v1(<span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb4-35" title="35">        v1.data[<span class="dv">0</span>] = <span class="st">"one"</span>;</a>
+<a class="sourceLine" id="cb4-36" title="36">        v1[<span class="dv">1</span>] = <span class="st">"two"</span>;</a>
+<a class="sourceLine" id="cb4-37" title="37">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-38" title="38">    }</a>
+<a class="sourceLine" id="cb4-39" title="39">    <span class="cf">if</span> (s == <span class="st">"6"</span>)</a>
+<a class="sourceLine" id="cb4-40" title="40">    {</a>
+<a class="sourceLine" id="cb4-41" title="41">        vector&lt;<span class="dt">float</span>&gt; v1(<span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb4-42" title="42">        v1.data[<span class="dv">0</span>] = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb4-43" title="43">        v1.data[<span class="dv">0</span>] = <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb4-44" title="44">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-45" title="45">    }</a>
+<a class="sourceLine" id="cb4-46" title="46">    <span class="cf">if</span> (s == <span class="st">"7"</span>)</a>
+<a class="sourceLine" id="cb4-47" title="47">    {</a>
+<a class="sourceLine" id="cb4-48" title="48">        <span class="dt">float</span> a[] = {<span class="fl">1.0</span><span class="bu">f</span>,<span class="fl">2.0</span><span class="bu">f</span>,<span class="fl">3.0</span><span class="bu">f</span>,<span class="fl">4.0</span><span class="bu">f</span>,<span class="fl">5.0</span><span class="bu">f</span>,<span class="fl">6.0</span><span class="bu">f</span>,<span class="fl">7.0</span><span class="bu">f</span>,<span class="fl">8.0</span><span class="bu">f</span>};</a>
+<a class="sourceLine" id="cb4-49" title="49">        vector&lt;<span class="dt">float</span>&gt; v1; <span class="co">// Using an overloaded constructor</span></a>
+<a class="sourceLine" id="cb4-50" title="50">        v1.assign(a,a+<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-51" title="51">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-52" title="52">    }</a>
+<a class="sourceLine" id="cb4-53" title="53">    <span class="cf">if</span> (s == <span class="st">"8"</span>)</a>
+<a class="sourceLine" id="cb4-54" title="54">    {</a>
+<a class="sourceLine" id="cb4-55" title="55">        vector&lt;<span class="dt">float</span>&gt; a(<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-56" title="56">        vector&lt;<span class="dt">float</span>&gt; b(<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-57" title="57">        <span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i&lt; a.getSize(); i++)</a>
+<a class="sourceLine" id="cb4-58" title="58">        {</a>
+<a class="sourceLine" id="cb4-59" title="59">            a[i] = i+<span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb4-60" title="60">            b[i] = i+<span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb4-61" title="61">        }</a>
+<a class="sourceLine" id="cb4-62" title="62">        vector&lt;<span class="dt">float</span>&gt; v1 = a.add(b);</a>
+<a class="sourceLine" id="cb4-63" title="63">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-64" title="64">    }</a>
+<a class="sourceLine" id="cb4-65" title="65">    <span class="cf">if</span> (s == <span class="st">"9"</span>)</a>
+<a class="sourceLine" id="cb4-66" title="66">    {</a>
+<a class="sourceLine" id="cb4-67" title="67">        vector&lt;<span class="dt">float</span>&gt; a(<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-68" title="68">        vector&lt;<span class="dt">float</span>&gt; b(<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-69" title="69">        <span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i&lt; a.getSize(); i++)</a>
+<a class="sourceLine" id="cb4-70" title="70">        {</a>
+<a class="sourceLine" id="cb4-71" title="71">            a[i] = i+<span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb4-72" title="72">            b[i] = i+<span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb4-73" title="73">        }</a>
+<a class="sourceLine" id="cb4-74" title="74">        vector&lt;<span class="dt">float</span>&gt; v1 = a + b;</a>
+<a class="sourceLine" id="cb4-75" title="75">        INFO(v1);</a>
+<a class="sourceLine" id="cb4-76" title="76">    }</a>
+<a class="sourceLine" id="cb4-77" title="77">    <span class="cf">if</span> (s == <span class="st">"10"</span>)</a>
+<a class="sourceLine" id="cb4-78" title="78">    {</a>
+<a class="sourceLine" id="cb4-79" title="79">        vector&lt;<span class="dt">float</span>&gt; b(<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-80" title="80">        <span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i&lt; b.getSize(); i++)</a>
+<a class="sourceLine" id="cb4-81" title="81">        {</a>
+<a class="sourceLine" id="cb4-82" title="82">            b.data[i] = i+<span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb4-83" title="83">        }</a>
+<a class="sourceLine" id="cb4-84" title="84">        b.resize(<span class="dv">10</span>);</a>
+<a class="sourceLine" id="cb4-85" title="85">        b.data[<span class="dv">8</span>] = <span class="dv">9</span>; b.data[<span class="dv">9</span>] = <span class="dv">10</span>; </a>
+<a class="sourceLine" id="cb4-86" title="86">        INFO(b);</a>
+<a class="sourceLine" id="cb4-87" title="87">    }</a>
+<a class="sourceLine" id="cb4-88" title="88">    <span class="cf">if</span> (s == <span class="st">"11"</span>)</a>
+<a class="sourceLine" id="cb4-89" title="89">    {</a>
+<a class="sourceLine" id="cb4-90" title="90">        vector&lt;<span class="dt">float</span>&gt; b(<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-91" title="91">        b.data[<span class="dv">0</span>] = <span class="fl">11.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-92" title="92">        b.data[<span class="dv">1</span>] = <span class="fl">12.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-93" title="93">        b.data[<span class="dv">2</span>] = <span class="fl">21.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-94" title="94">        b.data[<span class="dv">3</span>] = <span class="fl">31.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-95" title="95">        b.data[<span class="dv">4</span>] = <span class="fl">1.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-96" title="96">        b.data[<span class="dv">5</span>] = <span class="fl">71.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-97" title="97">        b.data[<span class="dv">6</span>] = <span class="fl">18.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-98" title="98">        b.data[<span class="dv">7</span>] = <span class="fl">11.4</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-99" title="99">        b.BubbleSort();</a>
+<a class="sourceLine" id="cb4-100" title="100">        INFO(b);</a>
+<a class="sourceLine" id="cb4-101" title="101">    }</a>
+<a class="sourceLine" id="cb4-102" title="102">    <span class="cf">if</span> (s == <span class="st">"12"</span>)</a>
+<a class="sourceLine" id="cb4-103" title="103">    {</a>
+<a class="sourceLine" id="cb4-104" title="104">        vector&lt;<span class="dt">float</span>&gt; b(<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-105" title="105">        b.data[<span class="dv">0</span>] = <span class="fl">11.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-106" title="106">        b.data[<span class="dv">1</span>] = <span class="fl">12.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-107" title="107">        b.data[<span class="dv">2</span>] = <span class="fl">21.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-108" title="108">        b.data[<span class="dv">3</span>] = <span class="fl">31.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-109" title="109">        b.data[<span class="dv">4</span>] = <span class="fl">1.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-110" title="110">        b.data[<span class="dv">5</span>] = <span class="fl">71.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-111" title="111">        b.data[<span class="dv">6</span>] = <span class="fl">18.3</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-112" title="112">        b.data[<span class="dv">7</span>] = <span class="fl">11.4</span><span class="bu">f</span>;</a>
+<a class="sourceLine" id="cb4-113" title="113">        b.Rotate(b.data,b.data+<span class="dv">4</span>,b.data+<span class="dv">8</span>);</a>
+<a class="sourceLine" id="cb4-114" title="114">        INFO(b);</a>
+<a class="sourceLine" id="cb4-115" title="115">    }</a>
+<a class="sourceLine" id="cb4-116" title="116"></a>
+<a class="sourceLine" id="cb4-117" title="117">   <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb4-118" title="118">}</a></code></pre>
+</div>
+<p>sample output for each task:</p>
+<div class="sourceCode" id="cb5">
+<pre class="sourceCode txt"><code class="sourceCode default"><a class="sourceLine" id="cb5-1" title="1">CSID@bluenose:assignment4Sol$ ./testSample 1</a>
+<a class="sourceLine" id="cb5-2" title="2">[INFO]: object of class vector was created using the vector() constructor</a>
+<a class="sourceLine" id="cb5-3" title="3">[INFO]: object of class vector was created using the vector() constructor</a>
+<a class="sourceLine" id="cb5-4" title="4">[INFO]: object of class vector was created using the vector() constructor</a>
+<a class="sourceLine" id="cb5-5" title="5">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-6" title="6">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-7" title="7">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-8" title="8">CSID@bluenose:assignment4Sol$ ./testSample 2</a>
+<a class="sourceLine" id="cb5-9" title="9">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-10" title="10">[INFO]: vector: size(1)</a>
+<a class="sourceLine" id="cb5-11" title="11">data[0] = 10</a>
+<a class="sourceLine" id="cb5-12" title="12">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-13" title="13">CSID@bluenose:assignment4Sol$ ./testSample 3</a>
+<a class="sourceLine" id="cb5-14" title="14">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-15" title="15">[INFO]: vector: size(5)</a>
+<a class="sourceLine" id="cb5-16" title="16">data[0] = 0</a>
+<a class="sourceLine" id="cb5-17" title="17">data[1] = 1</a>
+<a class="sourceLine" id="cb5-18" title="18">data[2] = 2</a>
+<a class="sourceLine" id="cb5-19" title="19">data[3] = 3</a>
+<a class="sourceLine" id="cb5-20" title="20">data[4] = 4</a>
+<a class="sourceLine" id="cb5-21" title="21">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-22" title="22">CSID@bluenose:assignment4Sol$ ./testSample 4</a>
+<a class="sourceLine" id="cb5-23" title="23">[INFO]: object of class vector was created using the vector(T*, T*) constructor</a>
+<a class="sourceLine" id="cb5-24" title="24">[INFO]: vector: size(8)</a>
+<a class="sourceLine" id="cb5-25" title="25">data[0] = 1</a>
+<a class="sourceLine" id="cb5-26" title="26">data[1] = 2</a>
+<a class="sourceLine" id="cb5-27" title="27">data[2] = 3</a>
+<a class="sourceLine" id="cb5-28" title="28">data[3] = 4</a>
+<a class="sourceLine" id="cb5-29" title="29">data[4] = 5</a>
+<a class="sourceLine" id="cb5-30" title="30">data[5] = 6</a>
+<a class="sourceLine" id="cb5-31" title="31">data[6] = 7</a>
+<a class="sourceLine" id="cb5-32" title="32">data[7] = 8</a>
+<a class="sourceLine" id="cb5-33" title="33">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-34" title="34">CSID@bluenose:assignment4Sol$ ./testSample 5</a>
+<a class="sourceLine" id="cb5-35" title="35">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-36" title="36">[INFO]: vector: size(2)</a>
+<a class="sourceLine" id="cb5-37" title="37">data[0] = one</a>
+<a class="sourceLine" id="cb5-38" title="38">data[1] = two</a>
+<a class="sourceLine" id="cb5-39" title="39">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-40" title="40">CSID@bluenose:assignment4Sol$ ./testSample 6</a>
+<a class="sourceLine" id="cb5-41" title="41">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-42" title="42">[INFO]: vector: size(2)</a>
+<a class="sourceLine" id="cb5-43" title="43">data[0] = 1</a>
+<a class="sourceLine" id="cb5-44" title="44">data[1] = 0</a>
+<a class="sourceLine" id="cb5-45" title="45">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-46" title="46">CSID@bluenose:assignment4Sol$ ./testSample 7</a>
+<a class="sourceLine" id="cb5-47" title="47">[INFO]: object of class vector was created using the vector() constructor</a>
+<a class="sourceLine" id="cb5-48" title="48">[INFO]: vector: size(8)</a>
+<a class="sourceLine" id="cb5-49" title="49">data[0] = 1</a>
+<a class="sourceLine" id="cb5-50" title="50">data[1] = 2</a>
+<a class="sourceLine" id="cb5-51" title="51">data[2] = 3</a>
+<a class="sourceLine" id="cb5-52" title="52">data[3] = 4</a>
+<a class="sourceLine" id="cb5-53" title="53">data[4] = 5</a>
+<a class="sourceLine" id="cb5-54" title="54">data[5] = 6</a>
+<a class="sourceLine" id="cb5-55" title="55">data[6] = 7</a>
+<a class="sourceLine" id="cb5-56" title="56">data[7] = 8</a>
+<a class="sourceLine" id="cb5-57" title="57">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-58" title="58">CSID@bluenose:assignment4Sol$ ./testSample 8</a>
+<a class="sourceLine" id="cb5-59" title="59">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-60" title="60">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-61" title="61">[INFO]: object of class vector was created using the vector(T*, T*) constructor</a>
+<a class="sourceLine" id="cb5-62" title="62">[INFO]: vector: size(8)</a>
+<a class="sourceLine" id="cb5-63" title="63">data[0] = 2</a>
+<a class="sourceLine" id="cb5-64" title="64">data[1] = 4</a>
+<a class="sourceLine" id="cb5-65" title="65">data[2] = 6</a>
+<a class="sourceLine" id="cb5-66" title="66">data[3] = 8</a>
+<a class="sourceLine" id="cb5-67" title="67">data[4] = 10</a>
+<a class="sourceLine" id="cb5-68" title="68">data[5] = 12</a>
+<a class="sourceLine" id="cb5-69" title="69">data[6] = 14</a>
+<a class="sourceLine" id="cb5-70" title="70">data[7] = 16</a>
+<a class="sourceLine" id="cb5-71" title="71">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-72" title="72">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-73" title="73">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-74" title="74">CSID@bluenose:assignment4Sol$ ./testSample 9</a>
+<a class="sourceLine" id="cb5-75" title="75">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-76" title="76">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-77" title="77">[INFO]: object of class vector was created using the vector(T*, T*) constructor</a>
+<a class="sourceLine" id="cb5-78" title="78">[INFO]: vector: size(8)</a>
+<a class="sourceLine" id="cb5-79" title="79">data[0] = 2</a>
+<a class="sourceLine" id="cb5-80" title="80">data[1] = 4</a>
+<a class="sourceLine" id="cb5-81" title="81">data[2] = 6</a>
+<a class="sourceLine" id="cb5-82" title="82">data[3] = 8</a>
+<a class="sourceLine" id="cb5-83" title="83">data[4] = 10</a>
+<a class="sourceLine" id="cb5-84" title="84">data[5] = 12</a>
+<a class="sourceLine" id="cb5-85" title="85">data[6] = 14</a>
+<a class="sourceLine" id="cb5-86" title="86">data[7] = 16</a>
+<a class="sourceLine" id="cb5-87" title="87">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-88" title="88">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-89" title="89">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-90" title="90">CSID@bluenose:assignment4Sol$ ./testSample 10</a>
+<a class="sourceLine" id="cb5-91" title="91">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-92" title="92">[INFO]: vector: size(10)</a>
+<a class="sourceLine" id="cb5-93" title="93">data[0] = 1</a>
+<a class="sourceLine" id="cb5-94" title="94">data[1] = 2</a>
+<a class="sourceLine" id="cb5-95" title="95">data[2] = 3</a>
+<a class="sourceLine" id="cb5-96" title="96">data[3] = 4</a>
+<a class="sourceLine" id="cb5-97" title="97">data[4] = 5</a>
+<a class="sourceLine" id="cb5-98" title="98">data[5] = 6</a>
+<a class="sourceLine" id="cb5-99" title="99">data[6] = 7</a>
+<a class="sourceLine" id="cb5-100" title="100">data[7] = 8</a>
+<a class="sourceLine" id="cb5-101" title="101">data[8] = 9</a>
+<a class="sourceLine" id="cb5-102" title="102">data[9] = 10</a>
+<a class="sourceLine" id="cb5-103" title="103">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-104" title="104">CSID@bluenose:assignment4Sol$ ./testSample 11</a>
+<a class="sourceLine" id="cb5-105" title="105">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-106" title="106">[INFO]: vector: size(8)</a>
+<a class="sourceLine" id="cb5-107" title="107">data[0] = 1.3</a>
+<a class="sourceLine" id="cb5-108" title="108">data[1] = 11.3</a>
+<a class="sourceLine" id="cb5-109" title="109">data[2] = 11.4</a>
+<a class="sourceLine" id="cb5-110" title="110">data[3] = 12.3</a>
+<a class="sourceLine" id="cb5-111" title="111">data[4] = 18.3</a>
+<a class="sourceLine" id="cb5-112" title="112">data[5] = 21.3</a>
+<a class="sourceLine" id="cb5-113" title="113">data[6] = 31.3</a>
+<a class="sourceLine" id="cb5-114" title="114">data[7] = 71.3</a>
+<a class="sourceLine" id="cb5-115" title="115">[INFO]: object of class vector deleted</a>
+<a class="sourceLine" id="cb5-116" title="116">CSID@bluenose:assignment4Sol$ ./testSample 12</a>
+<a class="sourceLine" id="cb5-117" title="117">[INFO]: object of class vector was created using the vector(size_t) constructor</a>
+<a class="sourceLine" id="cb5-118" title="118">[INFO]: vector: size(8)</a>
+<a class="sourceLine" id="cb5-119" title="119">data[0] = 1.3</a>
+<a class="sourceLine" id="cb5-120" title="120">data[1] = 71.3</a>
+<a class="sourceLine" id="cb5-121" title="121">data[2] = 18.3</a>
+<a class="sourceLine" id="cb5-122" title="122">data[3] = 11.4</a>
+<a class="sourceLine" id="cb5-123" title="123">data[4] = 11.3</a>
+<a class="sourceLine" id="cb5-124" title="124">data[5] = 12.3</a>
+<a class="sourceLine" id="cb5-125" title="125">data[6] = 21.3</a>
+<a class="sourceLine" id="cb5-126" title="126">data[7] = 31.3</a>
+<a class="sourceLine" id="cb5-127" title="127">[INFO]: object of class vector deleted</a></code></pre>
+</div>
+</body>
+</html>

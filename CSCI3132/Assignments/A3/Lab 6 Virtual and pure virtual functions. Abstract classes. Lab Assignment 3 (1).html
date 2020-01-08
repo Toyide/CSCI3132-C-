@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head></head><body>
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+<h1>CSCI 3132 Object-Oriented and Generic Programming</h1>
+<hr/>
+<p>CSCI 3132<br/>Summer 2019<br/>Reza Rahimi<br/><a rel="noopener" href="mailto:Reza.Rahimi@Dal.Ca">Reza.Rahimi@Dal.Ca</a></p>
+<h2>Lab 6: Virtual and pure virtual functions. Abstract classes. Lab Assignment 3</h2>
+<hr/>
+<h3>1. Lab exercise</h3>
+<h4>Virtual Function</h4>
+<p>Consider the same example we had before</p>
+<div class="sourceCode">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a rel="noopener" class="sourceLine" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="2"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="3"></a>
+<a rel="noopener" class="sourceLine" title="4"><span class="pp">#define LOG</span>(x)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a rel="noopener" class="sourceLine" title="5"></a>
+<a rel="noopener" class="sourceLine" title="6"><span class="kw">class</span> Vector {</a>
+<a rel="noopener" class="sourceLine" title="7"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="8">    <span class="dt">void</span> print() {</a>
+<a rel="noopener" class="sourceLine" title="9">        <span class="co">// This function does nothing I wish there was a way that I could say user of the class vector cannot call this function</span></a>
+<a rel="noopener" class="sourceLine" title="10">        LOG(<span class="st">&quot;This function is an abstract function&quot;</span>); <span class="co">// but what is an abstract function?</span></a>
+<a rel="noopener" class="sourceLine" title="11">    }</a>
+<a rel="noopener" class="sourceLine" title="12">};</a>
+<a rel="noopener" class="sourceLine" title="13"></a>
+<a rel="noopener" class="sourceLine" title="14"><span class="kw">class</span> Vector2: <span class="kw">public</span> Vector {</a>
+<a rel="noopener" class="sourceLine" title="15"><span class="kw">private</span>:</a>
+<a rel="noopener" class="sourceLine" title="16">    <span class="dt">float</span> _x, _y;</a>
+<a rel="noopener" class="sourceLine" title="17"></a>
+<a rel="noopener" class="sourceLine" title="18"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="19"></a>
+<a rel="noopener" class="sourceLine" title="20">    Vector2 () </a>
+<a rel="noopener" class="sourceLine" title="21">    {</a>
+<a rel="noopener" class="sourceLine" title="22">        _x = <span class="dv">0</span>;</a>
+<a rel="noopener" class="sourceLine" title="23">        _y = <span class="dv">0</span>;</a>
+<a rel="noopener" class="sourceLine" title="24">    }</a>
+<a rel="noopener" class="sourceLine" title="25"></a>
+<a rel="noopener" class="sourceLine" title="26">    Vector2 (<span class="dt">int</span> x, <span class="dt">int</span> y) </a>
+<a rel="noopener" class="sourceLine" title="27">    : _x(x), _y(y) {}</a>
+<a rel="noopener" class="sourceLine" title="28"></a>
+<a rel="noopener" class="sourceLine" title="29">    <span class="dt">void</span> print() {</a>
+<a rel="noopener" class="sourceLine" title="30">        LOG(<span class="st">&quot;This is a vector from Vector2 class&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="31">        <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;(&quot;</span> &lt;&lt; _x &lt;&lt; <span class="st">&quot;, &quot;</span> &lt;&lt; _y &lt;&lt; <span class="st">&quot;)&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;</a>
+<a rel="noopener" class="sourceLine" title="32">    }</a>
+<a rel="noopener" class="sourceLine" title="33"></a>
+<a rel="noopener" class="sourceLine" title="34">    <span class="dt">void</span> set_x (<span class="dt">float</span> x) { _x = x;}</a>
+<a rel="noopener" class="sourceLine" title="35">    <span class="dt">void</span> set_y (<span class="dt">float</span> y) { _y = y;}</a>
+<a rel="noopener" class="sourceLine" title="36">    <span class="dt">float</span> get_x () <span class="at">const</span> { <span class="cf">return</span> _x;}</a>
+<a rel="noopener" class="sourceLine" title="37">    <span class="dt">float</span> get_y () <span class="at">const</span> { <span class="cf">return</span> _y;}</a>
+<a rel="noopener" class="sourceLine" title="38">};</a>
+<a rel="noopener" class="sourceLine" title="39"></a>
+<a rel="noopener" class="sourceLine" title="40"><span class="kw">class</span> Vector3: <span class="kw">public</span> Vector2 {</a>
+<a rel="noopener" class="sourceLine" title="41"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="42">    <span class="dt">float</span> z;</a>
+<a rel="noopener" class="sourceLine" title="43"></a>
+<a rel="noopener" class="sourceLine" title="44">    Vector3(<span class="dt">float</span> x, <span class="dt">float</span> y, <span class="dt">float</span> z) </a>
+<a rel="noopener" class="sourceLine" title="45">    : Vector2(x,y), z(z) {}</a>
+<a rel="noopener" class="sourceLine" title="46"></a>
+<a rel="noopener" class="sourceLine" title="47">    Vector3()</a>
+<a rel="noopener" class="sourceLine" title="48">    : Vector2()</a>
+<a rel="noopener" class="sourceLine" title="49">    {</a>
+<a rel="noopener" class="sourceLine" title="50">        z = <span class="fl">0.0</span><span class="bu">f</span>;</a>
+<a rel="noopener" class="sourceLine" title="51">    }</a>
+<a rel="noopener" class="sourceLine" title="52">    <span class="dt">void</span> print() {</a>
+<a rel="noopener" class="sourceLine" title="53">        LOG(<span class="st">&quot;This is a vector from Vector3 class&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="54">        <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;(&quot;</span> &lt;&lt; get_x() &lt;&lt; <span class="st">&quot;, &quot;</span> &lt;&lt; get_y() &lt;&lt; <span class="st">&quot;, &quot;</span> &lt;&lt; z &lt;&lt; <span class="st">&quot;)&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;</a>
+<a rel="noopener" class="sourceLine" title="55">    }</a>
+<a rel="noopener" class="sourceLine" title="56"></a>
+<a rel="noopener" class="sourceLine" title="57">};</a>
+<a rel="noopener" class="sourceLine" title="58"></a>
+<a rel="noopener" class="sourceLine" title="59"><span class="co">// 1. the task is to overload the shift operator so it can a pointer to an object of class Vector</span></a>
+<a rel="noopener" class="sourceLine" title="60"></a>
+<a rel="noopener" class="sourceLine" title="61"><span class="dt">int</span> main(<span class="dt">void</span>) {</a>
+<a rel="noopener" class="sourceLine" title="62"></a>
+<a rel="noopener" class="sourceLine" title="63">    <span class="co">// 2. the task is create an object of class vector on heap</span></a>
+<a rel="noopener" class="sourceLine" title="64">    LOG(obj1);</a>
+<a rel="noopener" class="sourceLine" title="65">    <span class="co">// 3. the task is create an object of class vector2 on heap</span></a>
+<a rel="noopener" class="sourceLine" title="66">    LOG(obj2);</a>
+<a rel="noopener" class="sourceLine" title="67">    <span class="co">// 4. the task is create an object of class vector3 on heap</span></a>
+<a rel="noopener" class="sourceLine" title="68">    LOG(obj3);</a>
+<a rel="noopener" class="sourceLine" title="69"></a>
+<a rel="noopener" class="sourceLine" title="70">   <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a rel="noopener" class="sourceLine" title="71">}</a></code></pre>
+</div>
+<p>The output we see would look like this</p>
+<div class="sourceCode">
+<pre class="sourceCode txt"><code class="sourceCode default"><a rel="noopener" class="sourceLine" title="1">This is the print function from Vector class</a>
+<a rel="noopener" class="sourceLine" title="2">This is the print function from Vector class</a>
+<a rel="noopener" class="sourceLine" title="3">This is the print function from Vector class</a></code></pre>
+</div>
+<p>clearly, it is wrong but why???<br/>We want C++ to kinda realize that obj2 and obj3 are actually Vector2 and Vector3 objects, respectively. So when we log, it calls the correct print method.<br/>That&#39;s were the virtual functions come in<br/>Virtual functions introduce something called dynamic dispatch which compilers typically implement by V table. V table is basically a table which contains a mapping for all the virtual functions inside our base class so that we can actually map them to the correct overridden function at runtime.</p>
+<p>Let us start to write code...</p>
+<div class="sourceCode">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a rel="noopener" class="sourceLine" title="1"><span class="co">// 1. use virtual keyword</span></a>
+<a rel="noopener" class="sourceLine" title="2"><span class="co">// 2. use override key word</span></a></code></pre>
+</div>
+<h4>Interface in C++ (pure virtual functions)</h4>
+<p>remember the abstract function in Java this is the same in C++.</p>
+<p>Pure virtual functions help us to force subclasses to implement that function. In C++ sometimes we develop a class that has pure virtual functions without implementation. Those classes are called interface or abstract class.</p>
+<p>Let us see an example</p>
+<div class="sourceCode">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a rel="noopener" class="sourceLine" title="1"><span class="co">// 1. define a pure virtual function </span></a>
+<a rel="noopener" class="sourceLine" title="2"><span class="co">// 2. make Vector an abstract class</span></a></code></pre>
+</div>
+<h3>Assignment 3</h3>
+<ul>
+<li>we will build a matrix class which will be a subclass of the class math class.</li>
+</ul>
+<p>The math class is defined as:</p>
+<div class="sourceCode">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a rel="noopener" class="sourceLine" title="1"><span class="pp">#pragma once</span></a>
+<a rel="noopener" class="sourceLine" title="2"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="3"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="4"></a>
+<a rel="noopener" class="sourceLine" title="5"><span class="pp">#define LOG</span>(x,y)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span>y<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a rel="noopener" class="sourceLine" title="6"></a>
+<a rel="noopener" class="sourceLine" title="7"><span class="pp">#define INFO</span>(x)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span><span class="st">&quot;[INFO]: &quot;</span><span class="pp"> </span>&lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a rel="noopener" class="sourceLine" title="8"><span class="pp">#define WARNING</span>(x)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span><span class="st">&quot;[WARNING]: &quot;</span>&lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a rel="noopener" class="sourceLine" title="9"><span class="pp">#define ERROR</span>(x)<span class="pp"> </span><span class="bu">std::</span>cout &lt;&lt;<span class="pp"> </span><span class="st">&quot;[ERROR]: &quot;</span><span class="pp"> </span>&lt;&lt;<span class="pp"> </span>x<span class="pp"> </span>&lt;&lt;<span class="pp"> </span><span class="bu">std::</span>endl;</a>
+<a rel="noopener" class="sourceLine" title="10"></a>
+<a rel="noopener" class="sourceLine" title="11"><span class="kw">class</span> math </a>
+<a rel="noopener" class="sourceLine" title="12">{</a>
+<a rel="noopener" class="sourceLine" title="13"><span class="kw">private</span>:</a>
+<a rel="noopener" class="sourceLine" title="14"></a>
+<a rel="noopener" class="sourceLine" title="15"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="16">    math();</a>
+<a rel="noopener" class="sourceLine" title="17">    <span class="kw">virtual</span> ~math();</a>
+<a rel="noopener" class="sourceLine" title="18">    <span class="kw">virtual</span> <span class="bu">std::</span>string  print() <span class="at">const</span> = <span class="dv">0</span>;</a>
+<a rel="noopener" class="sourceLine" title="19">    <span class="kw">virtual</span> <span class="dt">size_t</span> get_size() <span class="at">const</span> = <span class="dv">0</span>;</a>
+<a rel="noopener" class="sourceLine" title="20">};</a>
+<a rel="noopener" class="sourceLine" title="21"></a>
+<a rel="noopener" class="sourceLine" title="22"><span class="bu">std::</span>ostream&amp; <span class="kw">operator</span>&lt;&lt;(<span class="bu">std::</span>ostream&amp; stream, <span class="at">const</span> math&amp; obj);</a></code></pre>
+</div>
+<p>You should implement the math class;</p>
+<p>The vector class inherits from the math class please find the declaration and implementation of the vector class</p>
+<div class="sourceCode">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a rel="noopener" class="sourceLine" title="1"><span class="pp">#pragma once</span></a>
+<a rel="noopener" class="sourceLine" title="2"><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="3"><span class="pp">#include</span><span class="im">&lt;cstring&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="4"><span class="pp">#include</span><span class="im">&lt;string&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="5"><span class="pp">#include </span><span class="im">&quot;math.h&quot;</span></a>
+<a rel="noopener" class="sourceLine" title="6"></a>
+<a rel="noopener" class="sourceLine" title="7"><span class="kw">class</span> vector : <span class="kw">public</span> math </a>
+<a rel="noopener" class="sourceLine" title="8">{</a>
+<a rel="noopener" class="sourceLine" title="9"><span class="co">// attributes</span></a>
+<a rel="noopener" class="sourceLine" title="10"><span class="kw">private</span>:</a>
+<a rel="noopener" class="sourceLine" title="11">    <span class="dt">size_t</span> _size;</a>
+<a rel="noopener" class="sourceLine" title="12"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="13">    <span class="dt">int</span>* data;</a>
+<a rel="noopener" class="sourceLine" title="14"><span class="co">// methods</span></a>
+<a rel="noopener" class="sourceLine" title="15"><span class="kw">private</span>:</a>
+<a rel="noopener" class="sourceLine" title="16"></a>
+<a rel="noopener" class="sourceLine" title="17"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="18">    vector();</a>
+<a rel="noopener" class="sourceLine" title="19">    vector(<span class="dt">size_t</span> size);</a>
+<a rel="noopener" class="sourceLine" title="20">    vector(<span class="dt">int</span>* data_input_begin, <span class="dt">int</span>* data_input_end);</a>
+<a rel="noopener" class="sourceLine" title="21">    ~vector();</a>
+<a rel="noopener" class="sourceLine" title="22">    vector(<span class="at">const</span> vector &amp;v);</a>
+<a rel="noopener" class="sourceLine" title="23">    vector&amp; <span class="kw">operator</span>=(<span class="at">const</span> vector&amp; other);</a>
+<a rel="noopener" class="sourceLine" title="24">    <span class="dt">void</span> resize(<span class="dt">size_t</span> newSize);</a>
+<a rel="noopener" class="sourceLine" title="25">    <span class="dt">size_t</span> get_size() <span class="at">const</span> <span class="kw">override</span>;</a>
+<a rel="noopener" class="sourceLine" title="26">    <span class="dt">void</span> assign(<span class="dt">int</span>* data_input_begin, <span class="dt">int</span>* data_input_end);</a>
+<a rel="noopener" class="sourceLine" title="27">    <span class="dt">int</span>&amp; <span class="kw">operator</span>[](<span class="dt">size_t</span> index);</a>
+<a rel="noopener" class="sourceLine" title="28">    vector add(<span class="at">const</span> vector &amp; nextObject ) <span class="at">const</span>;</a>
+<a rel="noopener" class="sourceLine" title="29">    vector <span class="kw">operator</span>+(<span class="at">const</span> vector &amp; nextObject ) <span class="at">const</span>;</a>
+<a rel="noopener" class="sourceLine" title="30">    <span class="bu">std::</span>string print() <span class="at">const</span> <span class="kw">override</span>;</a>
+<a rel="noopener" class="sourceLine" title="31">};</a></code></pre>
+</div>
+<div class="sourceCode">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a rel="noopener" class="sourceLine" title="1"><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></a>
+<a rel="noopener" class="sourceLine" title="2"></a>
+<a rel="noopener" class="sourceLine" title="3">vector::vector()</a>
+<a rel="noopener" class="sourceLine" title="4">: _size(<span class="dv">0</span>)</a>
+<a rel="noopener" class="sourceLine" title="5">{</a>
+<a rel="noopener" class="sourceLine" title="6">    INFO(<span class="st">&quot;object of class vector was created using the vector() constructor&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="7">}</a>
+<a rel="noopener" class="sourceLine" title="8"></a>
+<a rel="noopener" class="sourceLine" title="9">vector::vector(<span class="dt">size_t</span> size) </a>
+<a rel="noopener" class="sourceLine" title="10">: _size(size)</a>
+<a rel="noopener" class="sourceLine" title="11">{</a>
+<a rel="noopener" class="sourceLine" title="12">    INFO(<span class="st">&quot;object of class vector was created using the vector(size_t) constructor&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="13">    data = <span class="kw">new</span> <span class="dt">int</span>[_size];</a>
+<a rel="noopener" class="sourceLine" title="14">}</a>
+<a rel="noopener" class="sourceLine" title="15"></a>
+<a rel="noopener" class="sourceLine" title="16">vector::vector(<span class="dt">int</span>* data_input_begin, <span class="dt">int</span>* data_input_end)</a>
+<a rel="noopener" class="sourceLine" title="17">: _size(data_input_end - data_input_begin)</a>
+<a rel="noopener" class="sourceLine" title="18">{</a>
+<a rel="noopener" class="sourceLine" title="19">    INFO(<span class="st">&quot;object of class vector was created using the vector(int*, int*) constructor&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="20">    </a>
+<a rel="noopener" class="sourceLine" title="21">    assign(data_input_begin, data_input_end);</a>
+<a rel="noopener" class="sourceLine" title="22">}</a>
+<a rel="noopener" class="sourceLine" title="23"></a>
+<a rel="noopener" class="sourceLine" title="24">vector::~vector()</a>
+<a rel="noopener" class="sourceLine" title="25">{</a>
+<a rel="noopener" class="sourceLine" title="26">    INFO(<span class="st">&quot;object of class vector deleted&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="27">    <span class="kw">delete</span>[] data;</a>
+<a rel="noopener" class="sourceLine" title="28">}</a>
+<a rel="noopener" class="sourceLine" title="29"></a>
+<a rel="noopener" class="sourceLine" title="30">vector::vector(<span class="at">const</span> vector &amp;v) </a>
+<a rel="noopener" class="sourceLine" title="31">{</a>
+<a rel="noopener" class="sourceLine" title="32">    INFO(<span class="st">&quot;The copy constructor of the class vector was called&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="33">    _size = v.get_size();</a>
+<a rel="noopener" class="sourceLine" title="34">    data = <span class="kw">new</span> <span class="dt">int</span>[_size];</a>
+<a rel="noopener" class="sourceLine" title="35">    <span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i&lt;_size; i++)</a>
+<a rel="noopener" class="sourceLine" title="36">        data[i] = v.data[i];</a>
+<a rel="noopener" class="sourceLine" title="37"></a>
+<a rel="noopener" class="sourceLine" title="38">}</a>
+<a rel="noopener" class="sourceLine" title="39"></a>
+<a rel="noopener" class="sourceLine" title="40">vector&amp; vector::<span class="kw">operator</span>=(<span class="at">const</span> vector&amp; other) </a>
+<a rel="noopener" class="sourceLine" title="41">{</a>
+<a rel="noopener" class="sourceLine" title="42">    <span class="co">// check for self-assignment</span></a>
+<a rel="noopener" class="sourceLine" title="43">    <span class="cf">if</span>(&amp;other == <span class="kw">this</span>)</a>
+<a rel="noopener" class="sourceLine" title="44">        <span class="cf">return</span> *<span class="kw">this</span>;</a>
+<a rel="noopener" class="sourceLine" title="45">    <span class="co">// reuse storage when possible</span></a>
+<a rel="noopener" class="sourceLine" title="46">    <span class="cf">if</span>(_size != other.get_size())</a>
+<a rel="noopener" class="sourceLine" title="47">    {</a>
+<a rel="noopener" class="sourceLine" title="48">        <span class="cf">if</span> (_size)</a>
+<a rel="noopener" class="sourceLine" title="49">            <span class="kw">delete</span>[] data;</a>
+<a rel="noopener" class="sourceLine" title="50">        data = <span class="kw">new</span> <span class="dt">int</span>[other.get_size()];</a>
+<a rel="noopener" class="sourceLine" title="51">        _size = other.get_size();</a>
+<a rel="noopener" class="sourceLine" title="52">    }</a>
+<a rel="noopener" class="sourceLine" title="53">    <span class="bu">std::</span>copy(&amp;other.data[<span class="dv">0</span>], &amp;other.data[<span class="dv">0</span>] + _size, &amp;data[<span class="dv">0</span>]);</a>
+<a rel="noopener" class="sourceLine" title="54">    <span class="cf">return</span> *<span class="kw">this</span>;</a>
+<a rel="noopener" class="sourceLine" title="55">}</a>
+<a rel="noopener" class="sourceLine" title="56"></a>
+<a rel="noopener" class="sourceLine" title="57"><span class="dt">void</span> vector::resize(<span class="dt">size_t</span> newSize) </a>
+<a rel="noopener" class="sourceLine" title="58">{</a>
+<a rel="noopener" class="sourceLine" title="59">    <span class="cf">if</span> (_size != newSize)</a>
+<a rel="noopener" class="sourceLine" title="60">    {</a>
+<a rel="noopener" class="sourceLine" title="61">        <span class="dt">int</span>* ptr = <span class="kw">new</span> <span class="dt">int</span>[newSize];</a>
+<a rel="noopener" class="sourceLine" title="62">        <span class="dt">size_t</span> size = <span class="bu">std::</span>min(_size,newSize);</a>
+<a rel="noopener" class="sourceLine" title="63">        <span class="bu">std::</span>memcpy(data, ptr, size*<span class="kw">sizeof</span>(<span class="dt">int</span>));</a>
+<a rel="noopener" class="sourceLine" title="64">        <span class="kw">delete</span>[] data;</a>
+<a rel="noopener" class="sourceLine" title="65">        data = ptr;</a>
+<a rel="noopener" class="sourceLine" title="66">        _size = newSize;</a>
+<a rel="noopener" class="sourceLine" title="67">    }</a>
+<a rel="noopener" class="sourceLine" title="68">}</a>
+<a rel="noopener" class="sourceLine" title="69"></a>
+<a rel="noopener" class="sourceLine" title="70"><span class="dt">size_t</span> vector::get_size() <span class="at">const</span> {</a>
+<a rel="noopener" class="sourceLine" title="71">    <span class="cf">return</span> _size;</a>
+<a rel="noopener" class="sourceLine" title="72">}</a>
+<a rel="noopener" class="sourceLine" title="73"></a>
+<a rel="noopener" class="sourceLine" title="74"><span class="dt">void</span> vector::assign(<span class="dt">int</span>* data_input_begin, <span class="dt">int</span>* data_input_end)</a>
+<a rel="noopener" class="sourceLine" title="75">{</a>
+<a rel="noopener" class="sourceLine" title="76">    <span class="cf">if</span> (_size)</a>
+<a rel="noopener" class="sourceLine" title="77">        <span class="kw">delete</span>[] data;</a>
+<a rel="noopener" class="sourceLine" title="78">    _size = data_input_end - data_input_begin;</a>
+<a rel="noopener" class="sourceLine" title="79">    data = <span class="kw">new</span> <span class="dt">int</span>[_size];</a>
+<a rel="noopener" class="sourceLine" title="80">    <span class="bu">std::</span>memcpy(data, data_input_begin, _size*<span class="kw">sizeof</span>(<span class="dt">int</span>));</a>
+<a rel="noopener" class="sourceLine" title="81">}</a>
+<a rel="noopener" class="sourceLine" title="82"></a>
+<a rel="noopener" class="sourceLine" title="83"><span class="dt">int</span>&amp; vector::<span class="kw">operator</span>[](<span class="dt">size_t</span> index)</a>
+<a rel="noopener" class="sourceLine" title="84">{</a>
+<a rel="noopener" class="sourceLine" title="85">    <span class="cf">if</span> (index &gt;= _size) </a>
+<a rel="noopener" class="sourceLine" title="86">    { </a>
+<a rel="noopener" class="sourceLine" title="87">        ERROR(<span class="st">&quot;Vector index out of bound, exiting&quot;</span>);</a>
+<a rel="noopener" class="sourceLine" title="88">        exit(<span class="dv">0</span>); </a>
+<a rel="noopener" class="sourceLine" title="89">    } </a>
+<a rel="noopener" class="sourceLine" title="90">    <span class="cf">return</span> data[index]; </a>
+<a rel="noopener" class="sourceLine" title="91">}</a>
+<a rel="noopener" class="sourceLine" title="92"></a>
+<a rel="noopener" class="sourceLine" title="93">vector vector::add(<span class="at">const</span> vector &amp; nextObject ) <span class="at">const</span> </a>
+<a rel="noopener" class="sourceLine" title="94">{</a>
+<a rel="noopener" class="sourceLine" title="95">    <span class="dt">int</span>* add_data = <span class="kw">new</span> <span class="dt">int</span>[nextObject.get_size()];</a>
+<a rel="noopener" class="sourceLine" title="96">    <span class="cf">if</span> ( _size == nextObject.get_size() ) {</a>
+<a rel="noopener" class="sourceLine" title="97">        <span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i &lt; _size; i++)</a>
+<a rel="noopener" class="sourceLine" title="98">        {</a>
+<a rel="noopener" class="sourceLine" title="99">            add_data[i] = data[i] + nextObject.data[i];</a>
+<a rel="noopener" class="sourceLine" title="100">        }</a>
+<a rel="noopener" class="sourceLine" title="101">    } <span class="cf">else</span> {</a>
+<a rel="noopener" class="sourceLine" title="102">        WARNING( <span class="st">&quot;Size of the vectors should be the same&quot;</span> );</a>
+<a rel="noopener" class="sourceLine" title="103">        <span class="co">//return vector(add_data, nextObject.get_size()); </span></a>
+<a rel="noopener" class="sourceLine" title="104">    }</a>
+<a rel="noopener" class="sourceLine" title="105">    <span class="cf">return</span> vector(add_data, add_data + _size);</a>
+<a rel="noopener" class="sourceLine" title="106">}</a>
+<a rel="noopener" class="sourceLine" title="107"></a>
+<a rel="noopener" class="sourceLine" title="108">vector vector::<span class="kw">operator</span>+(<span class="at">const</span> vector &amp; nextObject ) <span class="at">const</span> </a>
+<a rel="noopener" class="sourceLine" title="109">{</a>
+<a rel="noopener" class="sourceLine" title="110">    <span class="cf">return</span> add(nextObject);</a>
+<a rel="noopener" class="sourceLine" title="111">}</a>
+<a rel="noopener" class="sourceLine" title="112"></a>
+<a rel="noopener" class="sourceLine" title="113"><span class="bu">std::</span>string vector::print() <span class="at">const</span> </a>
+<a rel="noopener" class="sourceLine" title="114">{</a>
+<a rel="noopener" class="sourceLine" title="115">    <span class="bu">std::</span>string v;</a>
+<a rel="noopener" class="sourceLine" title="116">    v = <span class="st">&quot;vector: size(&quot;</span> + <span class="bu">std::</span>to_string(_size) + <span class="st">&quot;)</span><span class="sc">\n</span><span class="st">&quot;</span>;</a>
+<a rel="noopener" class="sourceLine" title="117">    <span class="cf">for</span> (<span class="dt">size_t</span> i = <span class="dv">0</span>; i &lt; _size-<span class="dv">1</span>; i++)</a>
+<a rel="noopener" class="sourceLine" title="118">        v = v + <span class="st">&quot;data[&quot;</span> + <span class="bu">std::</span>to_string(i) + <span class="st">&quot;] = &quot;</span> + <span class="bu">std::</span>to_string(data[i]) + <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</a>
+<a rel="noopener" class="sourceLine" title="119">    v = v + <span class="st">&quot;data[&quot;</span> + <span class="bu">std::</span>to_string(_size-<span class="dv">1</span>) + <span class="st">&quot;] = &quot;</span> + <span class="bu">std::</span>to_string(data[_size-<span class="dv">1</span>]);</a>
+<a rel="noopener" class="sourceLine" title="120">    <span class="cf">return</span> v;</a>
+<a rel="noopener" class="sourceLine" title="121">}</a></code></pre>
+</div>
+<p>I have also provided you with the declaration of the class matrix</p>
+<div class="sourceCode">
+<pre class="sourceCode c++"><code class="sourceCode cpp"><a rel="noopener" class="sourceLine" title="1"><span class="pp">#pragma once </span></a>
+<a rel="noopener" class="sourceLine" title="2"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="3"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="4"><span class="pp">#include </span><span class="im">&lt;cstring&gt;</span></a>
+<a rel="noopener" class="sourceLine" title="5"><span class="pp">#include </span><span class="im">&quot;math.h&quot;</span></a>
+<a rel="noopener" class="sourceLine" title="6"><span class="pp">#include </span><span class="im">&quot;vector.h&quot;</span></a>
+<a rel="noopener" class="sourceLine" title="7"></a>
+<a rel="noopener" class="sourceLine" title="8"><span class="kw">class</span> matrix : <span class="kw">public</span> math</a>
+<a rel="noopener" class="sourceLine" title="9">{</a>
+<a rel="noopener" class="sourceLine" title="10"><span class="co">// attributes</span></a>
+<a rel="noopener" class="sourceLine" title="11"><span class="kw">private</span>:</a>
+<a rel="noopener" class="sourceLine" title="12">    <span class="dt">size_t</span> _size;</a>
+<a rel="noopener" class="sourceLine" title="13">    <span class="dt">size_t</span> _sizeRow;</a>
+<a rel="noopener" class="sourceLine" title="14">    <span class="dt">size_t</span> _sizeCol;</a>
+<a rel="noopener" class="sourceLine" title="15"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="16">    vector** mat;</a>
+<a rel="noopener" class="sourceLine" title="17"></a>
+<a rel="noopener" class="sourceLine" title="18"><span class="co">// methods</span></a>
+<a rel="noopener" class="sourceLine" title="19"><span class="kw">private</span>:</a>
+<a rel="noopener" class="sourceLine" title="20"></a>
+<a rel="noopener" class="sourceLine" title="21"><span class="kw">public</span>:</a>
+<a rel="noopener" class="sourceLine" title="22">    matrix();</a>
+<a rel="noopener" class="sourceLine" title="23">    matrix(<span class="dt">size_t</span> size);</a>
+<a rel="noopener" class="sourceLine" title="24">    matrix(<span class="dt">size_t</span> sizeRow, <span class="dt">size_t</span> sizeCol);</a>
+<a rel="noopener" class="sourceLine" title="25">    matrix(<span class="dt">int</span>* data_input, <span class="dt">size_t</span> sizeRow, <span class="dt">size_t</span> sizeCol);</a>
+<a rel="noopener" class="sourceLine" title="26">    matrix(<span class="dt">int</span>* data_input, <span class="dt">size_t</span> size);</a>
+<a rel="noopener" class="sourceLine" title="27">    matrix(vector**, <span class="dt">size_t</span>, <span class="dt">size_t</span>);</a>
+<a rel="noopener" class="sourceLine" title="28">    ~matrix();</a>
+<a rel="noopener" class="sourceLine" title="29">    vector&amp; <span class="kw">operator</span>[](<span class="dt">size_t</span> index);</a>
+<a rel="noopener" class="sourceLine" title="30">    <span class="dt">size_t</span> get_size() <span class="at">const</span> <span class="kw">override</span>;</a>
+<a rel="noopener" class="sourceLine" title="31">    <span class="dt">size_t</span> get_sizeRow() <span class="at">const</span>;</a>
+<a rel="noopener" class="sourceLine" title="32">    <span class="dt">size_t</span> get_sizeCol() <span class="at">const</span>;</a>
+<a rel="noopener" class="sourceLine" title="33">    <span class="dt">void</span> assign(<span class="dt">int</span>* data_input, <span class="dt">size_t</span> sizeRow, <span class="dt">size_t</span> sizeCol);</a>
+<a rel="noopener" class="sourceLine" title="34">    <span class="dt">void</span> resize(<span class="dt">size_t</span> newSizeRow, <span class="dt">size_t</span> newSizeCol);</a>
+<a rel="noopener" class="sourceLine" title="35">    matrix add(<span class="at">const</span> matrix &amp; nextObject ) <span class="at">const</span>;</a>
+<a rel="noopener" class="sourceLine" title="36">    matrix <span class="kw">operator</span>+(<span class="at">const</span> matrix &amp; nextObject ) <span class="at">const</span>;</a>
+<a rel="noopener" class="sourceLine" title="37">    <span class="bu">std::</span>string print() <span class="at">const</span> <span class="kw">override</span>;</a>
+<a rel="noopener" class="sourceLine" title="38">};</a></code></pre>
+</div>
+<p>Your tasks are as follows:<br/>0- Implement the math class (10%)<br/>1- Create the default constructor(10%)<br/>2- Create access to elements of the matrix(10%)<br/>3- Overload the [] operator(10%)<br/>4- Assign an array to the matrix using a constructor(10%)<br/>5- Use the assign function to assign an array to a matrix(10%)<br/>6- Declare the resize function(10%)<br/>7- Declare the constructor that takes vectors to build a matrix(10%)<br/>8- Declare the add function and overload the + operator(10%)<br/>9- Correct indentation and commenting your code (10%)</p>
+<p>Please only submit &quot;matrix.cpp&quot; and &quot;math.cpp&quot; in a zip file on the Brightspace.</p>
+
+<script type="text/javascript" src="/d2l/common/math/MathML.js?v=20.19.6.16704-33 "></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() { D2LMathML.DesktopInit('https://s.brightspace.com/lib/mathjax/2.6.1/MathJax.js?config=MML_HTMLorMML','https://s.brightspace.com/lib/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML'); });</script></body></html>

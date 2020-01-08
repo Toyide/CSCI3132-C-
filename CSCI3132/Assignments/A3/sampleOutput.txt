@@ -1,0 +1,223 @@
+rrahimi@bluenose:temp$ ./test 1
+[INFO]:  ---------- matrix 1 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class matrix was created using the matrix() constructor
+[INFO]: matrix: size(0)
+
+[INFO]: object of class matrix deleted
+[INFO]: Object of class math deleted
+
+rrahimi@bluenose:temp$ ./test 2
+[INFO]:  ---------- matrix 2 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class matrix was created using the matrix(size_t, size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(size_t) constructor
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: 0
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+
+rrahimi@bluenose:temp$ ./test 3
+[INFO]:  ---------- matrix 3 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class matrix was created using the matrix(size_t, size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(size_t) constructor
+[INFO]: 5
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+
+rrahimi@bluenose:temp$ ./test 4
+[INFO]:  ---------- matrix 4 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: Object of class matrix was created using the matrix(int*, size_t, size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: matrix: size(8)
+data[1][1] = 8
+data[1][2] = 7
+data[1][3] = 6
+data[1][4] = 5
+data[2][1] = 4
+data[2][2] = 3
+data[2][3] = 2
+data[2][4] = 1
+
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+
+rrahimi@bluenose:temp$ ./test 5
+[INFO]:  ---------- matrix 5 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class matrix was created using the matrix() constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: matrix: size(8)
+data[1][1] = 8
+data[1][2] = 7
+data[1][3] = 6
+data[1][4] = 5
+data[2][1] = 4
+data[2][2] = 3
+data[2][3] = 2
+data[2][4] = 1
+
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+
+rrahimi@bluenose:temp$ ./test 6
+[INFO]:  ---------- matrix 6 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class matrix was created using the matrix() constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(size_t) constructor
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: matrix: size(10)
+data[1][1] = 8
+data[1][2] = 7
+data[1][3] = 6
+data[1][4] = 5
+data[1][5] = 0
+data[2][1] = 4
+data[2][2] = 3
+data[2][3] = 2
+data[2][4] = 1
+data[2][5] = 0
+
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+
+rrahimi@bluenose:temp$ ./test 7
+[INFO]:  ---------- matrix 7 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: Object of class matrix was created using the matrix(vector**, size_t, size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: The copy constructor of the class vector was called
+[INFO]: Object of class math was created using the default constructor
+[INFO]: The copy constructor of the class vector was called
+[INFO]: matrix: size(16)
+data[1][1] = 8
+data[1][2] = 7
+data[1][3] = 6
+data[1][4] = 5
+data[1][5] = 4
+data[1][6] = 3
+data[1][7] = 2
+data[1][8] = 1
+data[2][1] = 1
+data[2][2] = 2
+data[2][3] = 3
+data[2][4] = 4
+data[2][5] = 5
+data[2][6] = 6
+data[2][7] = 7
+data[2][8] = 8
+
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+
+rrahimi@bluenose:temp$ ./test 8
+[INFO]:  ---------- matrix 8 ----------
+[INFO]: Object of class math was created using the default constructor
+[INFO]: Object of class matrix was created using the matrix(int*, size_t, size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: Object of class matrix was created using the matrix(int*, size_t, size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: object of class vector was created using the vector(int*, int*) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: Object of class matrix was created using the matrix(vector**, size_t, size_t) constructor
+[INFO]: Object of class math was created using the default constructor
+[INFO]: The copy constructor of the class vector was called
+[INFO]: Object of class math was created using the default constructor
+[INFO]: The copy constructor of the class vector was called
+[INFO]: matrix: size(8)
+data[1][1] = 9
+data[1][2] = 9
+data[1][3] = 9
+data[1][4] = 9
+data[2][1] = 9
+data[2][2] = 9
+data[2][3] = 9
+data[2][4] = 9
+
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class matrix deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: object of class vector deleted
+[INFO]: Object of class math deleted
+[INFO]: Object of class math deleted

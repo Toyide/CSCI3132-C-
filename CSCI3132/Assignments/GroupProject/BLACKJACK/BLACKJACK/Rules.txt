@@ -1,0 +1,24 @@
+BLACKJACK RULES
+
+BLACKJACK is a comparing cards game between several players and a dealer. Generally, each game has 5 turns. In each turn, players will have two cards initially. They will decide to Hit (request another card) or Stand (don't request another card) in order to reach a total of 21 or close to and not greater than 21. Players will have 50 chips at beginning and they are required to bet their chips to continue the game. Players will compare their left chips at the end of game and player with the most left chips will be the winner. It is possible to have multiple winners for a game if they get same amount of chips left.
+
+Before a game starting, players should choose the number of players who will participate in the game. Then the game will add such number of players and a dealer to the game.
+
+Before a turn starting, the game will shuffle and distribute 2 cards from front of the deck which contains 52 cards (4 colors, 13 cards for each color, A, 2, 3, 4, 5, 6, 7, 8, 9, 10, and J, Q, K are also representing 10, A can be either 1 or 11). Shuffle will swap cards in deck and make them random. All players who have enough chips left are required to bet before each turn starting. The betting number should between 1 and 50 chips and also not greater than the player's left chips.
+
+During each turn, players will be able to check thier two cards in hand and decide whether Hit or Stand and make thier choice. If a player choose Hit, he will recieve another card from the deck. Then if the toal still far away from 21 and the player choose to Hit again, he can recieve a new card. Players are allowed to continue until they choose to Stand or their cards in hand have a total greater than 21. Dealer will automatically Hit cards until reach 17 or greater than 17. Dealers cards are hidden from the player during the turn.
+
+After a turn finishing, the game will check results of each player and dealer. There are total of eight different cases:
+1. Both player and dealer are Blackjack (total of 21), then player get his bets back.
+2. Player is Blackjack and win, then player get his bets back and win another double times of his bets (previous bets * 3).
+3. Dealer is Blackjack and win, then all players lose their bets.
+4. Player wins but not Blackjack, then player get his bets back and win another one times of his bets (previous bets * 2).
+5. Player is Bust, then player lose his bets.
+6. Dealer is Bust, then all players who are not bust get their bets back and win another one times of his bets (previous bets * 2).
+7. Player and dealer tie and not blackjack, then player get his bets back.
+8. Player loses and dealer is not Blackjack, then player lose his bets.
+
+After a turn finishing, a new turn will begin and repeat above steps until 5 turns complete.
+
+At the end of the game, it will check all players' left chips and find the winner who has the most chips left. If more than one player have the same amount of the most bets left, then they are all winners.
+Moverover, if a player lose all his bets before the game completing, he will automatically lose the game. If all players lose all their bets before game completing, then the game will finish and no winner for the game.
